@@ -1,9 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
-
-<div class="container-fluid">
-
+<div>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -214,6 +209,4 @@
         </div> <!-- end col -->
     </div>
     <!-- end row -->
-    <!-- end row -->
 </div>
-@endsection

@@ -1,0 +1,1 @@
+<a class="dropdown-item text-danger" href="{{ route('auth.logout') }}"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>

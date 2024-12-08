@@ -10,10 +10,12 @@
 
                 <li class="{{ Route::is('home') ? 'mm-active' : '' }}">
                     <a href="{{ route('home') }}" wire:navigate class="waves-effect {{ Route::is('home') ? 'active' : '' }}">
-                        <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end">3</span>
+                        <i class="ri-dashboard-line"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
+
+                @if(Auth::user()->is_admin)
 
                 <li>
                     <a href="calendar.html" class=" waves-effect">
@@ -22,8 +24,8 @@
                     </a>
                 </li>
 
- 
-                
+
+
 
                 <li class="menu-title">Pages</li>
 
@@ -39,8 +41,8 @@
                         <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                     </ul>
                 </li>
+                @endif
 
-                
 
             </ul>
         </div>

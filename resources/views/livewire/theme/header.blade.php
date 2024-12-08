@@ -7,7 +7,7 @@
                 <livewire:theme.logo />
                 <!-- logo -->
 
-                
+
             </div>
 
             <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
@@ -22,7 +22,7 @@
                 </div>
             </form>
 
-            
+
         </div>
 
         <div class="d-flex">
@@ -48,9 +48,9 @@
                 </div>
             </div>
 
-            
 
-        
+
+
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
@@ -156,7 +156,7 @@
                     <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end mt-1">11</span><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
                     <a class="dropdown-item" href="#"><i class="ri-lock-unlock-line align-middle me-1"></i> Lock screen</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                    <livewire:auth.logout />
                 </div>
             </div>
 
