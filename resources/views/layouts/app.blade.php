@@ -16,8 +16,12 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
+    @rappasoftTableStyles
+
     <!-- App Css-->
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     @livewireStyles
 
 </head>
@@ -50,7 +54,7 @@
             </div>
             <!-- End Page-content -->
 
-            
+
 
         </div>
         <!-- end main content-->
@@ -67,12 +71,16 @@
     <script data-navigate-once src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script data-navigate-once src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
+    <!-- Adds the Core Table Scripts -->
+    @rappasoftTableScripts
+
     <script data-navigate-once src="{{ asset('assets/js/pages/index.init.js') }}"></script>
 
     <!-- App js -->
     <script data-navigate-once src="{{ asset('assets/js/app.js') }}"></script>
 
     @livewireScripts
+
 </body>
 
 

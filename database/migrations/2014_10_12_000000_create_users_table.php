@@ -27,7 +27,12 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();
             $table->string('address')->nullable();
 
+            // user
+            $table->boolean('is_superadmin')->default(0);
             $table->boolean('is_admin')->default(0);
+
+            // employee
+            $table->boolean('is_employee')->default(0);
 
             $table->rememberToken();
             $table->timestamps();

@@ -19,8 +19,9 @@ Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'logou
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegisterForm'])->name('auth.register');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 });
 
 Route::prefix('user-dash')->middleware(['auth'])->group(function () {

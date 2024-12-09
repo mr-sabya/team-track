@@ -18,6 +18,6 @@ class HomeController extends Controller
             return view('admin.home.index');
         }
 
-        return view('user.home.index');
+        return view('employee.home.index');
     }
 }
