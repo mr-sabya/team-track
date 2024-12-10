@@ -22,6 +22,11 @@ Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 's
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+
+    // company
+    Route::get('companies', [App\Http\Controllers\Admin\CompanyController::class, 'index'])->name('company.index');
+    Route::get('company/create', [App\Http\Controllers\Admin\CompanyController::class, 'create'])->name('company.create');
+    Route::get('company/edit/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'edit'])->name('company.edit');
 });
 
 Route::prefix('user-dash')->middleware(['auth'])->group(function () {

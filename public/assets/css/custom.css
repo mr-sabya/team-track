@@ -15,3 +15,8 @@
 .flash-message.hide {
     opacity: 0;
 }
+
+
+.toast-success{
+    background-color:#006b00 !important;
+}

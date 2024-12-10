@@ -32,6 +32,18 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-account-circle-line"></i>
+                        <span>Company</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('company.index') }}" wire:navigate>Company List</a></li>
+                        <li><a href="{{ route('company.create') }}" wire:navigate>Add Company</a></li>
+                        
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-account-circle-line"></i>
                         <span>Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">

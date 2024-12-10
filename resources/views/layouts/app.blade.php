@@ -19,6 +19,8 @@
 
     @rappasoftTableStyles
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}">
+
     <!-- App Css-->
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
@@ -74,12 +76,59 @@
     <!-- Adds the Core Table Scripts -->
     @rappasoftTableScripts
 
+    <!-- toastr plugin -->
+    <script data-navigate-once src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>
+
     <script data-navigate-once src="{{ asset('assets/js/pages/index.init.js') }}"></script>
 
     <!-- App js -->
     <script data-navigate-once src="{{ asset('assets/js/app.js') }}"></script>
 
+
+    @if(Session::has('success'))
+    <script>
+        toastr['success']('{{ Session::get("success") }}');
+    </script>
+    @endif
+
+    @if(Session::has('error'))
+    <script>
+        toastr['error']('{{ Session::get("success") }}');
+    </script>
+    @endif
+
+
+
     @livewireScripts
+
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('alert', (event) => {
+                // Since the event is an array, access the first item
+                const {
+                    type,
+                    message
+                } = event[0];
+
+                // Check if 'type' and 'message' are defined
+                if (type === undefined || message === undefined) {
+                    console.error('Error: type or message is undefined!');
+                } else {
+                    // Show toastr notification based on the type
+                    if (type === 'success') {
+                        toastr.success(message);
+                    } else if (type === 'info') {
+                        toastr.info(message);
+                    } else if (type === 'warning') {
+                        toastr.warning(message);
+                    } else if (type === 'error') {
+                        toastr.error(message);
+                    }
+                }
+
+            });
+        });
+    </script>
 
 </body>
 
