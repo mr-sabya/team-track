@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('driving_licenses', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->integer('driving_license_no')->unique();
-            $table->date('issue_date');
-            $table->date('expiry_date');
-            $table->string('image');
+            $table->integer('driving_license_no')->unique()->nullable();
+            $table->date('issue_date')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

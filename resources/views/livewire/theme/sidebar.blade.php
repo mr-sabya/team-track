@@ -40,6 +40,17 @@
                         
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Employee</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('employee.index') }}" wire:navigate>Employee List</a></li>
+                        <li><a href="{{ route('employee.create') }}" wire:navigate>Add Employee</a></li>
+                        
+                    </ul>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

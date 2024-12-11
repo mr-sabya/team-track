@@ -27,21 +27,28 @@ class Create extends Component
 
     public function submit()
     {
+        
         $this->validate();
+
+        if($this->is_superadmin == true){
+            $super_admin = 1;
+        }else{
+            $super_admin = 0;
+        }
 
         User::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'is_superadmin' => $this->is_superadmin,
-            'is_admin' => true,
+            'is_superadmin' => $super_admin,
+            'is_admin' => 1,
             'password' => Hash::make($this->password),
         ]);
 
         $this->dispatch('userCreated');
 
-        session()->flash('message', 'User added successfully!');
+        $this->dispatch('alert', ['type' => 'success',  'message' => 'User has been created successfully!']);
         $this->reset();
     }
 

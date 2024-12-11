@@ -27,6 +27,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('companies', [App\Http\Controllers\Admin\CompanyController::class, 'index'])->name('company.index');
     Route::get('company/create', [App\Http\Controllers\Admin\CompanyController::class, 'create'])->name('company.create');
     Route::get('company/edit/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'edit'])->name('company.edit');
+    
+    
+    // employee
+    Route::get('employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('employee.index');
+    Route::get('employee/create', [App\Http\Controllers\Admin\EmployeeController::class, 'create'])->name('employee.create');
+    Route::get('employee/edit/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'edit'])->name('employee.edit');
+    Route::get('employee/visa/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'visaInfo'])->name('employee.visa');
 });
 
 Route::prefix('user-dash')->middleware(['auth'])->group(function () {

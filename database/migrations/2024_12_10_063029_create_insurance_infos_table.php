@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('insurance_infos', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->integer('insurance_no')->unique();
-            $table->integer('type_id');
-            $table->date('expiry_date');
-            $table->string('image');
+            $table->integer('insurance_no')->unique()->nullable();
+            $table->integer('type_id')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

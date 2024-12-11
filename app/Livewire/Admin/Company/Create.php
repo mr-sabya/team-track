@@ -7,7 +7,8 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    public $name, $trade_license, $establishment_card, $vehicle, $domain_subscriptions, $tenancy_agreement, $electricity_bills, $wifi_bills, $sewerage_bills, $mobile_bills;
+    public $name, $trade_license, $establishment_card, $vehicle, $domain_subscriptions, $tenancy_agreement,
+        $electricity_bills, $wifi_bills, $sewerage_bills, $mobile_bills;
 
     public function save()
     {
@@ -37,7 +38,7 @@ class Create extends Component
             'mobile_bills' => $this->mobile_bills,
         ]);
 
-        session()->flash('message', 'Company created successfully!');
+        $this->dispatch('alert', ['type' => 'success',  'message' => 'Company has been created successfully!']);
         return $this->redirect(route('company.index'), navigate: true);
     }
 

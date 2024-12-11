@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('passports', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->integer('passport_no')->unique();
-            $table->date('issue_date');
-            $table->date('expiry_date');
-            $table->string('image');
+            $table->integer('passport_no')->unique()->nullable();
+            $table->date('issue_date')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

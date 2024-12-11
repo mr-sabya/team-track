@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\User;
+namespace App\Livewire\Admin\Employee;
 
 use App\Models\User;
 use Livewire\Component;
@@ -53,18 +53,18 @@ class Index extends Component
         if ($this->deleteId) {
             User::findOrFail($this->deleteId)->delete(); // Replace User with your model
             $this->deleteId = null;
-            $this->dispatch('alert', ['type' => 'success',  'message' => 'User has been deleted successfully!']);
+            session()->flash('message', 'Record deleted successfully!');
         }
     }
 
     public function render()
     {
         $data = User::query() // Replace with your model
-            ->where('is_admin', 1)
+            ->where('is_employee', 1)
             ->where('first_name', 'like', '%' . $this->search . '%') // Adjust the column
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.admin.user.index', ['data' => $data]);
+        return view('livewire.admin.employee.index', ['data' => $data]);
     }
 }

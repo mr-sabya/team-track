@@ -1,5 +1,19 @@
 <div>
     <form wire:submit.prevent="submit" class="needs-validation">
+
+
+
+        <div class="mb-3">
+            <label for="company_id" class="form-label">Company</label>
+            <select id="company_id" class="form-control @error('company_id') is-invalid @enderror" wire:model.defer="company_id">
+                <option value="" selected>Select Company</option>
+                @foreach($companies as $company)
+                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                @endforeach
+            </select>
+            @error('company_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+
         <div class="mb-3">
             <label for="first_name" class="form-label">First Name</label>
             <input type="text" id="first_name" class="form-control @error('first_name') is-invalid @enderror" wire:model.defer="first_name">
@@ -17,12 +31,20 @@
             <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" wire:model.defer="email">
             @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
+
         <div class="mb-3">
-            <label for="phone" class="form-label">Phone Number</label>
-            <input type="text" id="phone" class="form-control @error('phone') is-invalid @enderror" wire:model.defer="phone">
-            @error('phone') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            <label for="address" class="form-label">Address</label>
+            <input type="text" id="address" class="form-control @error('address') is-invalid @enderror" wire:model.defer="address">
+            @error('address') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
+        <div class="mb-3">
+            <label for="date_of_birth" class="form-label">Date Of Birth</label>
+            <input type="date" id="date_of_birth" class="form-control @error('date_of_birth') is-invalid @enderror" wire:model.defer="date_of_birth">
+            @error('date_of_birth') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+        <hr>
+        
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" wire:model.defer="password">
@@ -33,11 +55,6 @@
             <label for="confirm_password" class="form-label">Confirm Password</label>
             <input type="password" id="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" wire:model.defer="confirm_password">
             @error('confirm_password') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
-
-        <div class="form-check mb-3">
-            <input type="checkbox" id="is_superadmin" class="form-check-input" wire:model.defer="is_superadmin">
-            <label for="is_superadmin" class="form-check-label">Make Admin</label>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

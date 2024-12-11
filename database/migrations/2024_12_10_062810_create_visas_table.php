@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('visas', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->date('issue_date');
-            $table->date('expiry_date');
-            $table->string('image');
+            $table->date('issue_date')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
