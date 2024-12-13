@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="mb-3">
-                    <label for="passport_no" class="form-label">Passport No</label>
-                    <input type="text" id="passport_no" class="form-control @error('passport_no') is-invalid @enderror" wire:model.defer="passport_no">
-                    @error('passport_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    <label for="vehicle_no" class="form-label">Vehicle No</label>
+                    <input type="text" id="vehicle_no" class="form-control @error('vehicle_no') is-invalid @enderror" wire:model.defer="vehicle_no">
+                    @error('vehicle_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="mb-3">
                     <label for="issue_date" class="form-label">Issue Date</label>
@@ -21,7 +21,7 @@
             </div>
 
             <div class="col-lg-6">
-                <label class="form-label">Passport
+                <label class="form-label">Vehicle
                     <span wire:loading wire:target="image" class="text-muted">
                         Uploading...
                     </span>

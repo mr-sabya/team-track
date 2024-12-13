@@ -37,6 +37,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     
     Route::get('employee/visa/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'visaInfo'])->name('employee.visa');
     Route::get('employee/passport/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'passportInfo'])->name('employee.passport');
+    Route::get('employee/vehicle/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'vehicleInfo'])->name('employee.vehicle');
+    Route::get('employee/driving-license/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'DrivingLicense'])->name('employee.driving-license');
 });
 
 Route::prefix('user-dash')->middleware(['auth'])->group(function () {

@@ -6,7 +6,7 @@
                 <div class="mb-3">
                     <label for="issue_date" class="form-label">Issue Date</label>
                     <input type="date" id="issue_date" class="form-control @error('issue_date') is-invalid @enderror" wire:model.defer="issue_date">
-                    @error('first_name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    @error('issue_date') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="mb-3">
                     <label for="expiry_date" class="form-label">Expiry Date</label>
@@ -16,6 +16,13 @@
             </div>
 
             <div class="col-lg-6">
+                <label class="form-label">Visa
+                    <span wire:loading wire:target="image" class="text-muted">
+                        Uploading...
+                    </span>
+                </label>
+
+
                 <div class="image">
                     @if($image)
                     <button type="button" wire:click="clearImage" class="btn btn-primary btn-sm">Clear</button>
@@ -25,8 +32,7 @@
                     <img src="{{ url('storage.', $existingImage) }}" alt="">
                     @endif
                 </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Visa</label>
+                <div class="mb-3 mt-2">
                     <input type="file" id="image" class="form-control @error('image') is-invalid @enderror" wire:model.defer="image" wire:change="handleChange">
                     @error('image') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
@@ -35,7 +41,14 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+            type="submit"
+            wire:loading.attr="disabled"
+            wire:target="submit"
+            class="btn btn-primary">
+            <span wire:loading.remove wire:target="submit">Save</span>
+            <span wire:loading wire:target="submit">Saving...</span>
+        </button>
     </form>
 
 

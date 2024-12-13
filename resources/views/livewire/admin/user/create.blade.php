@@ -40,7 +40,15 @@
             <label for="is_superadmin" class="form-check-label">Make Admin</label>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+            type="submit"
+            wire:loading.attr="disabled"
+            wire:target="submit"
+            class="btn btn-primary">
+            <span wire:loading.remove wire:target="submit">Save</span>
+            <span wire:loading wire:target="submit">Saving...</span>
+        </button>
+
     </form>
 
 

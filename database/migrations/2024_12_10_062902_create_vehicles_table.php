@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->integer('vehicle_no')->unique()->nullable();
+            $table->string('vehicle_no')->unique()->nullable();
             $table->date('issue_date')->nullable();
             $table->date('expiry_date')->nullable();
             $table->string('image')->nullable();

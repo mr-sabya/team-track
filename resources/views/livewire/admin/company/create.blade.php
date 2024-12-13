@@ -58,8 +58,14 @@
                 </div>
             </div>
         </div>
-        <div class="">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+
+        <button
+            type="submit"
+            wire:loading.attr="disabled"
+            wire:target="submit"
+            class="btn btn-primary">
+            <span wire:loading.remove wire:target="submit">Save</span>
+            <span wire:loading wire:target="submit">Saving...</span>
+        </button>
     </form>
 </div>

@@ -57,6 +57,8 @@ class Visa extends Component
         }
         $visa_info->save();
 
+
+        sleep(2); // Simulating a delay
         $this->dispatch('alert', ['type' => 'success',  'message' => 'Visa Info has been updates successfully!']);
     }
 

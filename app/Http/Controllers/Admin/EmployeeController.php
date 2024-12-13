@@ -49,10 +49,25 @@ class EmployeeController extends Controller
         return view('admin.employee.visa', compact('employee'));
     }
 
-    // visa
+    // passport
     public function passportInfo($id)
     {
         $employee = User::findOrFail(intval($id));
         return view('admin.employee.passport', compact('employee'));
+    }
+
+
+    // vehicle
+    public function vehicleInfo($id)
+    {
+        $employee = User::findOrFail(intval($id));
+        return view('admin.employee.vehicle', compact('employee'));
+    }
+
+    // driving-license
+    public function DrivingLicense($id)
+    {
+        $employee = User::findOrFail(intval($id));
+        return view('admin.employee.driving-license', compact('employee'));
     }
 }

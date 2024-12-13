@@ -65,8 +65,28 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class,'company_id');    
     }
 
+    // user visa
     public function visa()
     {
         return $this->hasOne(Visa::class, 'user_id');
+    }
+
+    //user passport
+    public function passport()
+    {
+        return $this->hasOne(Passport::class, 'user_id');
+    }
+
+
+    // user vehicle
+    public function vehicle()
+    {
+        return $this->hasOne(Vehicle::class, 'user_id');
+    }
+
+    // user driving-license
+    public function drivingLicense()
+    {
+        return $this->hasOne(DrivingLicense::class, 'user_id');
     }
 }
