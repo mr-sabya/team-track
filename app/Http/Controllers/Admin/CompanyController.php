@@ -13,7 +13,8 @@ class CompanyController extends Controller
     public function index()
     {
         //
-        return view('admin.company.index');
+        $title = "Company";
+        return view('admin.company.index', compact('title'));
     }
 
     /**
@@ -22,23 +23,8 @@ class CompanyController extends Controller
     public function create()
     {
         //
-        return view('admin.company.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $title = "Company";
+        return view('admin.company.create', compact('title'));
     }
 
     /**
@@ -47,22 +33,7 @@ class CompanyController extends Controller
     public function edit($id)
     {
         //
-        return view('admin.company.edit', compact('id'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $title = "Company";
+        return view('admin.company.edit', compact('id', 'title'));
     }
 }

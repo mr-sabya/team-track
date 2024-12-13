@@ -6,6 +6,9 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="card">
+                <div class="card-header">
+                    <h4>Add New {{ $title }}</h4>
+                </div>
                 <div class="card-body">
                     <livewire:admin.user.create />
                 </div>
@@ -14,6 +17,9 @@
 
         <div class="col-lg-8">
             <div class="card">
+                <div class="card-header">
+                    <h4>{{ $title }} List</h4>
+                </div>
                 <div class="card-body">
                     <livewire:admin.user.index />
                 </div>

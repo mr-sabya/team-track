@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -13,7 +14,8 @@ class EmployeeController extends Controller
     public function index()
     {
         //
-        return view('admin.employee.index');
+        $title = "Employee";
+        return view('admin.employee.index', compact('title'));
     }
 
     /**
@@ -22,7 +24,8 @@ class EmployeeController extends Controller
     public function create()
     {
         //
-        return view('admin.employee.create');
+        $title = "Employee";
+        return view('admin.employee.create', compact('title'));
     }
 
 
@@ -33,13 +36,23 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         //
-        return view('admin.employee.edit', compact('id'));
+        $title = "Employee";
+        $employee = User::findOrFail(intval($id));
+        return view('admin.employee.edit', compact('title', 'employee'));
     }
 
 
     // visa
     public function visaInfo($id)
     {
-        return view('admin.employee.visa', compact('id'));
+        $employee = User::findOrFail(intval($id));
+        return view('admin.employee.visa', compact('employee'));
+    }
+
+    // visa
+    public function passportInfo($id)
+    {
+        $employee = User::findOrFail(intval($id));
+        return view('admin.employee.passport', compact('employee'));
     }
 }

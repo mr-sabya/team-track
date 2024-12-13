@@ -21,6 +21,7 @@ Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 's
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 
     // company
@@ -33,7 +34,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('employee.index');
     Route::get('employee/create', [App\Http\Controllers\Admin\EmployeeController::class, 'create'])->name('employee.create');
     Route::get('employee/edit/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'edit'])->name('employee.edit');
+    
     Route::get('employee/visa/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'visaInfo'])->name('employee.visa');
+    Route::get('employee/passport/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'passportInfo'])->name('employee.passport');
 });
 
 Route::prefix('user-dash')->middleware(['auth'])->group(function () {

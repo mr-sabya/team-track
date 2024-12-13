@@ -8,7 +8,7 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
-                    <h3>Edit Company</h3>
+                    <h3>Edit {{ $title }}</h3>
                 </div>
 
                 <div class="card-body">

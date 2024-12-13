@@ -13,7 +13,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('admin.user.index');
+        $title = "User";
+        return view('admin.user.index', compact('title'));
     }
 
     /**

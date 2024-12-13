@@ -111,7 +111,7 @@
                         $domain_subscriptions_diff = \Carbon\Carbon::parse($item->domain_subscriptions)->diffInDays(now(), false);
                         @endphp
 
-                        <div class="{{ $vehicle_diff > 0 ? 'text-danger' : '' }}">
+                        <div class="{{ $domain_subscriptions_diff > 0 ? 'text-danger' : '' }}">
                             {{ $item->domain_subscriptions }}
                             <br>
                             <strong>
@@ -128,7 +128,7 @@
                         $tenancy_agreement_diff = \Carbon\Carbon::parse($item->tenancy_agreement)->diffInDays(now(), false);
                         @endphp
 
-                        <div class="{{ $vehicle_diff > 0 ? 'text-danger' : '' }}">
+                        <div class="{{ $tenancy_agreement_diff > 0 ? 'text-danger' : '' }}">
                             {{ $item->tenancy_agreement }}
                             <br>
                             <strong>
@@ -145,7 +145,7 @@
                         $electricity_bills_diff = \Carbon\Carbon::parse($item->electricity_bills)->diffInDays(now(), false);
                         @endphp
 
-                        <div class="{{ $vehicle_diff > 0 ? 'text-danger' : '' }}">
+                        <div class="{{ $electricity_bills_diff > 0 ? 'text-danger' : '' }}">
                             {{ $item->electricity_bills }}
                             <br>
                             <strong>
@@ -162,7 +162,7 @@
                         $wifi_bills_diff = \Carbon\Carbon::parse($item->wifi_bills)->diffInDays(now(), false);
                         @endphp
 
-                        <div class="{{ $vehicle_diff > 0 ? 'text-danger' : '' }}">
+                        <div class="{{ $wifi_bills_diff > 0 ? 'text-danger' : '' }}">
                             {{ $item->wifi_bills }}
                             <br>
                             <strong>
@@ -179,7 +179,7 @@
                         $sewerage_bills_diff = \Carbon\Carbon::parse($item->sewerage_bills)->diffInDays(now(), false);
                         @endphp
 
-                        <div class="{{ $vehicle_diff > 0 ? 'text-danger' : '' }}">
+                        <div class="{{ $sewerage_bills_diff > 0 ? 'text-danger' : '' }}">
                             {{ $item->sewerage_bills }}
                             <br>
                             <strong>
@@ -196,7 +196,7 @@
                         $mobile_bills_diff = \Carbon\Carbon::parse($item->mobile_bills)->diffInDays(now(), false);
                         @endphp
 
-                        <div class="{{ $vehicle_diff > 0 ? 'text-danger' : '' }}">
+                        <div class="{{ $mobile_bills_diff > 0 ? 'text-danger' : '' }}">
                             {{ $item->mobile_bills }}
                             <br>
                             <strong>
@@ -220,7 +220,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="text-center">No results found</td>
+                    <td colspan="12" class="text-center">No results found</td>
                 </tr>
                 @endforelse
             </tbody>

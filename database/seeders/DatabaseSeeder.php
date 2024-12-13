@@ -15,13 +15,15 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::create([
-            'first_name' => 'Sabya',
-            'last_name' => 'Roy',
-            'email' => 'sabya.citik@gmail.com',
-            'password' => Hash::make('sabya12345'),
-            'is_superadmin' => 1,
-            'is_admin' => 1,
-        ]);
+        // \App\Models\User::create([
+        //     'first_name' => 'Sabya',
+        //     'last_name' => 'Roy',
+        //     'email' => 'sabya.citik@gmail.com',
+        //     'password' => Hash::make('sabya12345'),
+        //     'is_superadmin' => 1,
+        //     'is_admin' => 1,
+        // ]);
+
+        $this->call(CountriesSeeder::class);
     }
 }
