@@ -18,9 +18,9 @@
                 @if(Auth::user()->is_admin)
 
                 <li>
-                    <a href="calendar.html" class=" waves-effect">
+                    <a href="{{ route('insurance.index') }}" wire:navigate class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
-                        <span>Calendar</span>
+                        <span>Insurance Type</span>
                     </a>
                 </li>
 

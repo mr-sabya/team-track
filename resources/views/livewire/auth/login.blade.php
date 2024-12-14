@@ -27,8 +27,15 @@
 
     <div class="form-group text-center mt-3">
         <div class="col-12">
-            <button class="btn btn-primary btn-block btn-lg waves-effect waves-light w-100" type="submit">
-                Log In</button>
+
+            <button
+                type="submit"
+                wire:loading.attr="disabled"
+                wire:target="login"
+                class="btn btn-primary btn-block btn-lg waves-effect waves-light w-100">
+                <span wire:loading.remove wire:target="login">Login</span>
+                <span wire:loading wire:target="login">Login.....</span>
+            </button>
         </div>
     </div>
 
@@ -37,6 +44,6 @@
             <a href="auth-recoverpw.html" class="text-color">
                 <i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
         </div>
-        
+
     </div>
 </form>

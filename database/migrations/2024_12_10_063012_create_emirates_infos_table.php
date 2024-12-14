@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('emirates_infos', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->integer('emirates_id_no')->unique()->nullable();
-            $table->integer('card_no')->unique()->nullable();
+            $table->string('emirates_id_no')->unique()->nullable();
+            $table->string('card_no')->unique()->nullable();
             $table->date('expiry_date')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();

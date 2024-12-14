@@ -22,7 +22,7 @@ class Login extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             // Redirect on successful login
-            return redirect()->route('home');
+            return $this->redirect(route('home'), navigate: true);
         }
 
         // Display error on failure
