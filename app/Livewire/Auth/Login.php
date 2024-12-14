@@ -22,7 +22,12 @@ class Login extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             // Redirect on successful login
-            return $this->redirect(route('home'), navigate: true);
+
+            if(Auth::user()->is_admin){
+                return $this->redirect(route('home'), navigate: true);
+            }
+            
+            return $this->redirect(route('employee-dash.home'), navigate: true);
         }
 
         // Display error on failure

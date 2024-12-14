@@ -7,15 +7,15 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="d-flex justify-content-end">
-                <livewire:admin.employee.menu id="{{ $employee->id }}" />
+                <livewire:admin.employee.menu id="{{ $employee->id }}"/>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <h3>Driving License ({{ $employee->first_name }} {{ $employee->last_name }})</h3>
+                    <h3>Insurance Info ({{ $employee->first_name }} {{ $employee->last_name }})</h3>
                 </div>
                 <div class="card-body">
-                    <livewire:admin.employee.driving-license id="{{ $employee->id }}" />
+                    <livewire:admin.employee.insurance id="{{ $employee->id }}" />
                 </div>
             </div>
         </div>

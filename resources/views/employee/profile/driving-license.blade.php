@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="d-flex justify-content-end">
-                <livewire:admin.employee.menu id="{{ $employee->id }}" />
+                <livewire:employee.profile.menu id="{{ $employee->id }}"/>
             </div>
 
             <div class="card">

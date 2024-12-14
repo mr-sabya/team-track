@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -36,4 +37,13 @@ class CompanyController extends Controller
         $title = "Company";
         return view('admin.company.edit', compact('id', 'title'));
     }
+
+    // show
+    public function show($id)
+    {
+        $company = Company::findOrFail(intval($id));
+        $title = "Company";
+        return view('admin.company.show', compact('company', 'title'));    
+    }
+
 }

@@ -20,31 +20,48 @@ Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 's
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 
     // company
     Route::get('companies', [App\Http\Controllers\Admin\CompanyController::class, 'index'])->name('company.index');
     Route::get('company/create', [App\Http\Controllers\Admin\CompanyController::class, 'create'])->name('company.create');
     Route::get('company/edit/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'edit'])->name('company.edit');
-    
-    
+    Route::get('company/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'show'])->name('company.show');
+
+
     // employee
     Route::get('employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('employee.index');
-    Route::get('employee/create', [App\Http\Controllers\Admin\EmployeeController::class, 'create'])->name('employee.create');
-    Route::get('employee/edit/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'edit'])->name('employee.edit');
-    
-    Route::get('employee/visa/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'visaInfo'])->name('employee.visa');
-    Route::get('employee/passport/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'passportInfo'])->name('employee.passport');
-    Route::get('employee/vehicle/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'vehicleInfo'])->name('employee.vehicle');
-    Route::get('employee/driving-license/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'DrivingLicense'])->name('employee.driving-license');
-    
-    
+
+    Route::prefix('employee')->as('employee.')->group(function () {
+        Route::get('create', [App\Http\Controllers\Admin\EmployeeController::class, 'create'])->name('create');
+        Route::get('edit/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'edit'])->name('edit');
+
+        Route::get('visa/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'visaInfo'])->name('visa');
+        Route::get('passport/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'passportInfo'])->name('passport');
+        Route::get('vehicle/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'vehicleInfo'])->name('vehicle');
+        Route::get('driving-license/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'DrivingLicense'])->name('driving-license');
+        Route::get('emirates-info/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'EmiratesInfo'])->name('emirates');
+        Route::get('insurance-info/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'InsuranceInfo'])->name('insurance');
+    });
+
+
     Route::get('insurance-type', [App\Http\Controllers\Admin\InsuranceTypeController::class, 'index'])->name('insurance.index');
     // 
 });
 
-Route::prefix('user-dash')->middleware(['auth'])->group(function () {
+Route::prefix('employee-dash')->as('employee-dash.')->middleware(['auth'])->group(function () {
+    Route::get('/', [App\Http\Controllers\Employee\HomeController::class, 'index'])->name('home');
     
+    Route::get('profile', [App\Http\Controllers\Employee\HomeController::class, 'profile'])->name('profile');
+    Route::get('visa', [App\Http\Controllers\Employee\HomeController::class, 'visaInfo'])->name('visa');
+    Route::get('passport', [App\Http\Controllers\Employee\HomeController::class, 'passportInfo'])->name('passport');
+    Route::get('vehicle', [App\Http\Controllers\Employee\HomeController::class, 'vehicleInfo'])->name('vehicle');
+    Route::get('driving-license', [App\Http\Controllers\Employee\HomeController::class, 'DrivingLicense'])->name('driving-license');
+    Route::get('emirates-info', [App\Http\Controllers\Employee\HomeController::class, 'EmiratesInfo'])->name('emirates');
+    Route::get('insurance-info', [App\Http\Controllers\Employee\HomeController::class, 'InsuranceInfo'])->name('insurance');
+
+
+    Route::get('change-password', [App\Http\Controllers\Employee\HomeController::class, 'password'])->name('password');
 });

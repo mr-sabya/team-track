@@ -3,6 +3,6 @@
 @section('content')
 
 <div class="container-fluid">
-    <livewire:employee.home.index id="{{ $employee->id }}" />
+    <livewire:employee.profile.password id="{{ $employee->id }}" />
 </div>
 @endsection

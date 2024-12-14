@@ -70,4 +70,18 @@ class EmployeeController extends Controller
         $employee = User::findOrFail(intval($id));
         return view('admin.employee.driving-license', compact('employee'));
     }
+    
+    // Emirates Info
+    public function EmiratesInfo($id)
+    {
+        $employee = User::findOrFail(intval($id));
+        return view('admin.employee.emirates', compact('employee'));
+    }
+
+    // Insurance Info
+    public function InsuranceInfo($id)
+    {
+        $employee = User::findOrFail(intval($id));
+        return view('admin.employee.insurance', compact('employee'));
+    }
 }

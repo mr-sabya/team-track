@@ -60,6 +60,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class,'country_id');    
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class,'company_id');    
@@ -88,5 +93,17 @@ class User extends Authenticatable
     public function drivingLicense()
     {
         return $this->hasOne(DrivingLicense::class, 'user_id');
+    }
+
+    // user emirates info
+    public function emiratesInfo()
+    {
+        return $this->hasOne(EmiratesInfo::class, 'user_id');
+    }
+
+    // user isurance info
+    public function insuranceInfo()
+    {
+        return $this->hasOne(InsuranceInfo::class, 'user_id');
     }
 }

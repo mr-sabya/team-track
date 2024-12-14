@@ -14,6 +14,10 @@
     <li class="nav-item">
         <a class="nav-link {{ Route::is('employee.driving-license') ? 'active': '' }}" href="{{ route('employee.driving-license', $employee_id) }}" wire:navigate>Driving License </a>
     </li>
-
-
+    <li class="nav-item">
+        <a class="nav-link {{ Route::is('employee.emirates') ? 'active': '' }}" href="{{ route('employee.emirates', $employee_id) }}" wire:navigate>Emirates Info </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ Route::is('employee.insurance') ? 'active': '' }}" href="{{ route('employee.insurance', $employee_id) }}" wire:navigate>Insurance Info </a>
+    </li>
 </ul>
