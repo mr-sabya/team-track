@@ -22,7 +22,8 @@ Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 's
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
 
-    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+    Route::get('users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user.index');
+    Route::get('user/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('user.edit');
 
     // company
     Route::get('companies', [App\Http\Controllers\Admin\CompanyController::class, 'index'])->name('company.index');
@@ -47,8 +48,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 
 
-    Route::get('insurance-type', [App\Http\Controllers\Admin\InsuranceTypeController::class, 'index'])->name('insurance.index');
     // 
+    Route::get('insurance-type', [App\Http\Controllers\Admin\InsuranceTypeController::class, 'index'])->name('insurance.index');
+    
+    
+    // role
+    Route::get('roles', [App\Http\Controllers\Admin\RoleController::class, 'index'])->name('role.index');
+    Route::get('permissions', [App\Http\Controllers\Admin\PermissionController::class, 'index'])->name('permission.index');
+    
 });
 
 Route::prefix('employee-dash')->as('employee-dash.')->middleware(['auth'])->group(function () {

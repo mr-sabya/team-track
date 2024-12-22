@@ -12,25 +12,46 @@
 
                 @if(Auth::user()->is_admin)
 
+                @if( Auth::user()->is_superadmin || Auth::user()->can('dashboard'))
                 <li class="{{ Route::is('home') ? 'mm-active' : '' }}">
                     <a href="{{ route('home') }}" wire:navigate class="waves-effect {{ Route::is('home') ? 'active' : '' }}">
                         <i class="ri-dashboard-line"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @endif
 
+                @if( Auth::user()->is_superadmin || Auth::user()->can('manage-insurance-type'))
                 <li>
                     <a href="{{ route('insurance.index') }}" wire:navigate class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
                         <span>Insurance Type</span>
                     </a>
                 </li>
+                @endif
 
+
+
+
+
+
+                @if( Auth::user()->is_superadmin)
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Role & Permissions</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('permission.index') }}" wire:navigate>Permissions</a></li>
+                        <li><a href="{{ route('role.index') }}" wire:navigate>Roles</a></li>
+                    </ul>
+                </li>
+                @endif
 
 
 
                 <li class="menu-title">Pages</li>
-
+                @if( Auth::user()->is_superadmin || Auth::user()->can('manage-company') && Auth::user()->can('manage-employee'))
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-account-circle-line"></i>
@@ -43,6 +64,9 @@
 
                     </ul>
                 </li>
+                @endif
+
+                @if( Auth::user()->is_superadmin || Auth::user()->can('manage-employee'))
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-account-circle-line"></i>
@@ -54,6 +78,7 @@
 
                     </ul>
                 </li>
+                @endif
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -61,8 +86,14 @@
                         <span>Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('users.index') }}" wire:navigate>User Management</a></li>
+                        @if( Auth::user()->is_superadmin)
+                        <li><a href="{{ route('user.index') }}" wire:navigate>User Management</a></li>
+                        @endif
+
+                        @if( Auth::user()->is_superadmin || Auth::user()->can('manage-company'))
                         <li><a href="{{ route('company.index') }}" wire:navigate>Company Management</a></li>
+                        @endif
+
                         <li><a href="auth-recoverpw.html">Recover Password</a></li>
                         <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                     </ul>

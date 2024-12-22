@@ -59,8 +59,11 @@ class Index extends Component
 
     public function render()
     {
-        $data = User::query() // Replace with your model
-            ->where('is_admin', 1)
+        $data = User::with('roles') // Replace with your model
+            ->where(function ($query) {
+                $query->where('is_admin', 1)
+                    ->orWhere('is_company', 1);
+            })
             ->where('first_name', 'like', '%' . $this->search . '%') // Adjust the column
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);

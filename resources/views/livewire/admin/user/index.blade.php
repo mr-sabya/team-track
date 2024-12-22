@@ -38,24 +38,25 @@
                 </th>
                 <th>Email</th>
                 <th>User Type</th>
+                <th>Role</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($data as $item)
             <tr>
-                <td class="text-center">{{ $item->id }}</td>
+                <td class="text-center">{{ $loop->iteration }}</td>
                 <td>{{ $item->first_name }} {{ $item->last_name }}</td>
                 <td>{{ $item->email }}</td>
                 <td>
-                    @if($item->is_superadmin == true)
-                    Admin
-                    @else
-                    Normal
-                    @endif
+                    {{ $item->is_superadmin ? 'Super Admin' : ''}}
+                    {!! $item->is_company ? 'Company <strong>(' . $item->company['name'] . ')</strong>' : '' !!}
                 </td>
                 <td>
-                    <a href="" class="btn btn-primary btn-sm">
+                    {{ $item->roles->first()->name ?? 'No Role Assigned' }}
+                </td>
+                <td>
+                    <a href="{{ route('user.edit', $item->id)}}" wire:navigate class="btn btn-primary btn-sm">
                         <i class="ri-edit-line"></i>
                     </a>
                     <button class="btn btn-danger btn-sm" wire:click="confirmDelete({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#deleteModal">
