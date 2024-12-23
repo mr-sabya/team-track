@@ -27,6 +27,10 @@ class Login extends Component
                 return $this->redirect(route('home'), navigate: true);
             }
             
+            if(Auth::user()->is_company){
+                return $this->redirect(route('company-dash.home'), navigate: true);
+            }
+            
             return $this->redirect(route('employee-dash.home'), navigate: true);
         }
 

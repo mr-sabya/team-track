@@ -99,6 +99,13 @@
                     </ul>
                 </li>
 
+                @elseif(Auth::user()->is_company)
+                <li class="{{ Route::is('company-dash.home') ? 'mm-active' : '' }}">
+                    <a href="{{ route('company-dash.home') }}" wire:navigate class="waves-effect {{ Route::is('company-dash.home') ? 'active' : '' }}">
+                        <i class="ri-dashboard-line"></i>
+                        <span>Dashboard</span>
+                    </a>    
+                </li>
                 @else
 
                 <li class="{{ Route::is('employee-dash.home') ? 'mm-active' : '' }}">
