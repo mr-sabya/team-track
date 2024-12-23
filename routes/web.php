@@ -76,6 +76,11 @@ Route::prefix('employee-dash')->as('employee-dash.')->middleware(['auth'])->grou
 Route::prefix('company-dash')->as('company-dash.')->middleware(['auth', 'company'])->group(function () {
     Route::get('/', [App\Http\Controllers\Company\HomeController::class, 'index'])->name('home');
 
+    Route::get('/company-profile', [App\Http\Controllers\Company\ProfileController::class, 'index'])->name('profile');
+
+
+    // employee
+    Route::get('employees', [App\Http\Controllers\Company\EmployeeController::class, 'index'])->name('employee.index');
 
     Route::prefix('employee')->as('employee.')->group(function () {
         Route::get('create', [App\Http\Controllers\Company\EmployeeController::class, 'create'])->name('create');

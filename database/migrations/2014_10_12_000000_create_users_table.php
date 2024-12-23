@@ -33,6 +33,7 @@ return new class extends Migration
 
             // employee
             $table->boolean('is_company')->default(0);
+            $table->boolean('is_employee')->default(0);
 
             $table->rememberToken();
             $table->timestamps();

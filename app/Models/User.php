@@ -39,6 +39,7 @@ class User extends Authenticatable
 
         // company
         'is_company',
+        'is_employee',
     ];
 
     /**
