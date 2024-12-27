@@ -39,7 +39,7 @@ class Create extends Component
         ]);
 
         $this->dispatch('alert', ['type' => 'success',  'message' => 'Company has been created successfully!']);
-        return $this->redirect(route('company.index'), navigate: true);
+        return redirect()->route('company.index')->with(['navigate' => true]);
     }
 
 
