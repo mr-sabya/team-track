@@ -13,4 +13,11 @@ class InsuranceTypeController extends Controller
         $title = "Insurance Type";
         return view('admin.insurance.index', compact('title'));
     }
+
+
+    public function trash()
+    {
+        $title = "Insurance Type";
+        return view('admin.insurance.trash', compact('title'));
+    }
 }

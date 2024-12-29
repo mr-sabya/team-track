@@ -11,7 +11,7 @@
                     <h3>Add New {{ $title }}</h3>
                 </div>
                 <div class="card-body">
-                    <livewire:admin.employee.create />
+                    <livewire:component.employee.create />
                 </div>
             </div>
         </div>

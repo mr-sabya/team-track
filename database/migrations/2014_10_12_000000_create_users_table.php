@@ -27,6 +27,14 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();
             $table->string('address')->nullable();
 
+            // image
+            $table->string('image')->nullable();
+
+            // notification
+            $table->boolean('is_notification')->nullable();
+            $table->boolean('is_mail_notification')->nullable();
+            $table->integer('mail_date')->nullable();
+
             // user
             $table->boolean('is_superadmin')->default(0);
             $table->boolean('is_admin')->default(0);
@@ -36,6 +44,7 @@ return new class extends Migration
             $table->boolean('is_employee')->default(0);
 
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

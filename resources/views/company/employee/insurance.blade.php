@@ -15,7 +15,7 @@
                     <h3>Insurance Info ({{ $employee->first_name }} {{ $employee->last_name }})</h3>
                 </div>
                 <div class="card-body">
-                    <livewire:admin.employee.insurance id="{{ $employee->id }}" />
+                    <livewire:component.employee.insurance id="{{ $employee->id }}" />
                 </div>
             </div>
         </div>

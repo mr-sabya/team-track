@@ -12,7 +12,7 @@
                     <a href="{{{ route('company-dash.employee.create') }}}" wire:navigate class="btn btn-primary"><i class="ri-add-line"></i> Add {{ $title }}</a>
                 </div>
                 <div class="card-body">
-                    <livewire:company.employee.index companyId="{{ Auth::user()->company_id }}" />
+                    <livewire:component.employee.index companyId="{{ Auth::user()->company_id }}" isDatatable="1"  isCompanyRoute="yes"/>
                 </div>
             </div>
         </div>

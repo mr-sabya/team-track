@@ -2,7 +2,7 @@
 
     <form wire:submit.prevent="submit" class="needs-validation">
 
-
+        @if($companyId == '')
         <div class="row border-bottom mb-3">
             <div class="col-lg-6">
                 <div class="mb-3">
@@ -17,6 +17,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <div class="row">
             <div class="col-lg-6">
@@ -103,7 +104,7 @@
             <span wire:loading.remove wire:target="submit">Save</span>
             <span wire:loading wire:target="submit">Saving...</span>
         </button>
-        
+
     </form>
 
 

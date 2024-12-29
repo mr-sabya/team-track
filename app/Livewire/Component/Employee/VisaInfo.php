@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Admin\Employee;
+namespace App\Livewire\Component\Employee;
 
 use App\Models\User;
-use App\Models\Visa as ModelsVisa;
+use App\Models\Visa;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Visa extends Component
+class VisaInfo extends Component
 {
     use WithFileUploads;
 
@@ -17,7 +17,7 @@ class Visa extends Component
     public function mount($id)
     {
         $this->employee = User::find($id);
-        $this->visa_info = ModelsVisa::where('id', $this->employee->visa['id'])->first();
+        $this->visa_info = Visa::where('id', $this->employee->visa['id'])->first();
         // dd($visa_info);
         $this->issue_date = $this->visa_info->issue_date;
         $this->expiry_date = $this->visa_info->expiry_date;
@@ -48,7 +48,7 @@ class Visa extends Component
 
         // dd($this->image);
 
-        $visa_info = ModelsVisa::where('id', $this->employee->visa['id'])->first();
+        $visa_info = Visa::where('id', $this->employee->visa['id'])->first();
         $visa_info->issue_date = $this->issue_date;
         $visa_info->expiry_date = $this->expiry_date;
         // Use the helper to upload the image
@@ -64,6 +64,6 @@ class Visa extends Component
 
     public function render()
     {
-        return view('livewire.admin.employee.visa');
+        return view('livewire.component.employee.visa-info');
     }
 }

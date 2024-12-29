@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Employee;
+namespace App\Livewire\Component\Employee;
 
 use App\Models\Company;
 use App\Models\DrivingLicense;
@@ -15,6 +15,7 @@ use Livewire\Component;
 
 class Create extends Component
 {
+    public $companyId = '';
     public $company_id = '';
     public $first_name = '';
     public $last_name = '';
@@ -26,23 +27,33 @@ class Create extends Component
     public $confirm_password = '';
 
 
-    protected $rules = [
-        'company_id' => 'required',
-        'first_name' => 'required|string|max:255',
-        'last_name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'address' => 'required|string|max:255',
-        'date_of_birth' => 'required',
-        'password' => 'required|min:6|same:confirm_password',
-    ];
+    public function mount($companyId = null)
+    {
+        if ($companyId) {
+            $this->companyId = $companyId;
+        }
+    }
 
     public function submit()
     {
-        $this->validate();
-        // dd($this->company_id);
+        $rules = [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'address' => 'required|string|max:255',
+            'date_of_birth' => 'required',
+            'password' => 'required|min:6|same:confirm_password',
+        ];
+
+        if (!$this->companyId) {
+            $rules['company_id'] = 'required';
+        }
+
+        $this->validate($rules);
+
         try {
             $user = User::create([
-                'company_id' => $this->company_id,
+                'company_id' =>  $this->companyId ?? $this->company_id,
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email' => $this->email,
@@ -95,7 +106,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.admin.employee.create', [
+        return view('livewire.component.employee.create', [
             'companies' => Company::orderBy('name', 'ASC')->get(),
         ]);
     }

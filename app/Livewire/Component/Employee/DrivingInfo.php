@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Admin\Employee;
+namespace App\Livewire\Component\Employee;
 
-use App\Models\DrivingLicense as ModelsDrivingLicense;
+use App\Models\DrivingLicense;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class DrivingLicense extends Component
+class DrivingInfo extends Component
 {
     use WithFileUploads;
 
@@ -17,7 +17,7 @@ class DrivingLicense extends Component
     public function mount($id)
     {
         $this->employee = User::find($id);
-        $this->driving_license = ModelsDrivingLicense::where('id', $this->employee->drivingLicense['id'])->first();
+        $this->driving_license = DrivingLicense::where('id', $this->employee->drivingLicense['id'])->first();
         // dd($visa_info);
         $this->driving_license_no = $this->driving_license->driving_license_no;
         $this->issue_date = $this->driving_license->issue_date;
@@ -41,7 +41,7 @@ class DrivingLicense extends Component
 
     public function submit()
     {
-        $driving_license = ModelsDrivingLicense::where('id', $this->employee->drivingLicense['id'])->first();
+        $driving_license = DrivingLicense::where('id', $this->employee->drivingLicense['id'])->first();
         // dd($passport_info->id);
 
         if ($driving_license->driving_license_no == $this->driving_license_no) {
@@ -76,9 +76,9 @@ class DrivingLicense extends Component
         sleep(2); // Simulating a delay
         $this->dispatch('alert', ['type' => 'success',  'message' => 'Drving License Info has been updates successfully!']);
     }
-    
+
     public function render()
     {
-        return view('livewire.admin.employee.driving-license');
+        return view('livewire.component.employee.driving-info');
     }
 }

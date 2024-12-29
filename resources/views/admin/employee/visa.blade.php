@@ -15,7 +15,7 @@
                     <h3>Visa Info ({{ $employee->first_name }} {{ $employee->last_name }})</h3>
                 </div>
                 <div class="card-body">
-                    <livewire:admin.employee.visa id="{{ $employee->id }}" />
+                    <livewire:component.employee.visa-info id="{{ $employee->id }}" />
                 </div>
             </div>
         </div>

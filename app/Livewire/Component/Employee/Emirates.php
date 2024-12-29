@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Employee;
+namespace App\Livewire\Component\Employee;
 
 use App\Models\EmiratesInfo;
 use App\Models\User;
@@ -90,9 +90,9 @@ class Emirates extends Component
         sleep(2); // Simulating a delay
         $this->dispatch('alert', ['type' => 'success',  'message' => 'Emirates Info has been updates successfully!']);
     }
-
+    
     public function render()
     {
-        return view('livewire.admin.employee.emirates');
+        return view('livewire.component.employee.emirates');
     }
 }

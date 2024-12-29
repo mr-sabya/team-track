@@ -15,7 +15,7 @@
                     <h3>Driving License ({{ $employee->first_name }} {{ $employee->last_name }})</h3>
                 </div>
                 <div class="card-body">
-                    <livewire:admin.employee.driving-license id="{{ $employee->id }}" />
+                    <livewire:component.employee.driving-info id="{{ $employee->id }}" />
                 </div>
             </div>
         </div>

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Admin\Employee;
+namespace App\Livewire\Component\Employee;
 
-use App\Models\Passport as ModelsPassport;
+use App\Models\Passport;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Passport extends Component
+class PassportInfo extends Component
 {
     use WithFileUploads;
 
@@ -17,7 +17,7 @@ class Passport extends Component
     public function mount($id)
     {
         $this->employee = User::find($id);
-        $this->passport_info = ModelsPassport::where('id', $this->employee->passport['id'])->first();
+        $this->passport_info = Passport::where('id', $this->employee->passport['id'])->first();
         // dd($visa_info);
         $this->passport_no = $this->passport_info->passport_no;
         $this->issue_date = $this->passport_info->issue_date;
@@ -41,7 +41,7 @@ class Passport extends Component
 
     public function submit()
     {
-        $passport_info = ModelsPassport::where('id', $this->employee->passport['id'])->first();
+        $passport_info = Passport::where('id', $this->employee->passport['id'])->first();
         // dd($passport_info->id);
 
         if ($passport_info->passport_no == $this->passport_no) {
@@ -79,6 +79,6 @@ class Passport extends Component
 
     public function render()
     {
-        return view('livewire.admin.employee.passport');
+        return view('livewire.component.employee.passport-info');
     }
 }

@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
         //     'is_admin' => 1,
         // ]);
 
-        $this->call(CountriesSeeder::class);
+        // $this->call(CountriesSeeder::class);
     }
 }

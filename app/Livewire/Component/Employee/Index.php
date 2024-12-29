@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Company\Employee;
+namespace App\Livewire\Component\Employee;
 
 use App\Models\User;
 use Livewire\Component;
@@ -10,23 +10,40 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination, WithoutUrlPagination;
+    public $companyId = '';
+    public $isDatatable;
+    public $isCompanyRoute = '';
 
     public $search = '';
     public $sortField = 'id'; // Default sort field
     public $sortDirection = 'asc'; // Default sort direction
     public $perPage = 10; // Items per page
     public $deleteId = null; // Holds the ID of the record to delete
-    public $companyId;
 
     protected $queryString = ['search', 'sortField', 'sortDirection', 'perPage'];
 
     protected $listeners = ['userCreated' => 'refreshUsers'];
 
 
-    public function mount($companyId)
+    public function mount($companyId = null, $isDatatable = null, $isCompanyRoute = null)
     {
-        $this->companyId = $companyId;    
+        if ($isDatatable == 1) {
+            $this->isDatatable = true;
+        }elseif ($isDatatable == 0){
+            $this->isDatatable = false;
+        }
+
+        if ($companyId != null) {
+            $this->companyId = $companyId;
+        }
+
+        if ($isCompanyRoute != null) {
+            $this->isCompanyRoute = $isCompanyRoute;
+        }
+
+        //  dd($this->isDatatable);
     }
+
 
     public function refreshUsers()
     {
@@ -66,14 +83,23 @@ class Index extends Component
 
     public function render()
     {
-        $data = User::query() // Replace with your model
-            ->where('is_employee', 1)
-            ->where('company_id', $this->companyId)
-            ->where('first_name', 'like', '%' . $this->search . '%') // Adjust the column
-            ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate($this->perPage);
+        $query = User::query()->where('is_employee', 1);
 
-        return view('livewire.company.employee.index', ['data' => $data]);
+        if ($this->companyId) {
+            $query->where('company_id', $this->companyId);
+        }
+
+        if ($this->isDatatable) {
+            $query->where('first_name', 'like', '%' . $this->search . '%')
+                ->orderBy($this->sortField, $this->sortDirection);
+
+            $data = $query->paginate($this->perPage);
+        } else {
+            $data = $query->take(10)->get();
+        }
+
+        // dd($data);
+
+        return view('livewire.component.employee.index', ['data' => $data]);
     }
-
 }

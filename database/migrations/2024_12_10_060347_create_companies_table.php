@@ -23,6 +23,16 @@ return new class extends Migration
             $table->date('wifi_bills')->nullable();
             $table->date('sewerage_bills')->nullable();
             $table->date('mobile_bills')->nullable();
+
+            // info
+            $table->string('logo')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('salution')->nullable();
+            $table->string('signature')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

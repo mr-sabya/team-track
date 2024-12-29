@@ -9,7 +9,7 @@ class Index extends Component
 {
     public $title;
 
-    public $insuranceTypes, $type, $insuranceTypeId;
+    public $insuranceTypes, $type, $insuranceTypeId, $insuranceTypeIdToDelete;
     public $isEditMode = false;
 
 
@@ -55,15 +55,27 @@ class Index extends Component
         $this->resetFields();
     }
 
-    public function delete($id)
+    // Method to set ID for deletion
+    public function confirmDelete($id)
     {
-        InsuranceType::findOrFail($id)->delete();
-        $this->dispatch('alert', ['type' => 'success',  'message' => 'Insurance Type been deleted successfully!']);
+        $this->insuranceTypeIdToDelete = $id;
+    }
+
+    // Method to delete the record
+    public function deleteConfirmed()
+    {
+        if ($this->insuranceTypeIdToDelete) {
+            InsuranceType::findOrFail($this->insuranceTypeIdToDelete)->delete();
+            $this->insuranceTypeIdToDelete = null;
+            $this->dispatch('alert', ['type' => 'success',  'message' => 'Insurance Type has been moved to trash.']);
+        }
     }
 
     public function render()
     {
         $this->insuranceTypes = InsuranceType::all();
-        return view('livewire.admin.insurance-type.index');
+        return view('livewire.admin.insurance-type.index',[
+            'trash' => InsuranceType::onlyTrashed()->count(),
+        ]);
     }
 }

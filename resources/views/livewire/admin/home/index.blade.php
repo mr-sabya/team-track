@@ -66,7 +66,7 @@
                     <h4 class="mb-4 mt-0 card-title">Recent Employees</h4>
                     <div class="row">
                         <div class="col-12">
-                            <livewire:admin.employee.index />
+                            <livewire:component.employee.index isDatatable="0" />
                         </div>
                     </div>
                 </div>

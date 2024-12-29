@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Employee;
+namespace App\Livewire\Component\Employee;
 
 use App\Models\InsuranceInfo;
 use App\Models\InsuranceType;
@@ -80,8 +80,9 @@ class Insurance extends Component
 
     public function render()
     {
-        return view('livewire.admin.employee.insurance',[
+        return view('livewire.component.employee.insurance',[
             'types' => InsuranceType::all(),
         ]);
     }
+
 }

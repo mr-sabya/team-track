@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Admin\Employee;
+namespace App\Livewire\Component\Employee;
 
 use App\Models\User;
-use App\Models\Vehicle as ModelsVehicle;
+use App\Models\Vehicle;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Vehicle extends Component
+class VehicleInfo extends Component
 {
     use WithFileUploads;
 
@@ -17,7 +17,7 @@ class Vehicle extends Component
     public function mount($id)
     {
         $this->employee = User::find($id);
-        $this->vehicle_info = ModelsVehicle::where('id', $this->employee->vehicle['id'])->first();
+        $this->vehicle_info = Vehicle::where('id', $this->employee->vehicle['id'])->first();
         // dd($visa_info);
         $this->vehicle_no = $this->vehicle_info->vehicle_no;
         $this->issue_date = $this->vehicle_info->issue_date;
@@ -41,7 +41,7 @@ class Vehicle extends Component
 
     public function submit()
     {
-        $vehicle_info = ModelsVehicle::where('id', $this->employee->vehicle['id'])->first();
+        $vehicle_info = Vehicle::where('id', $this->employee->vehicle['id'])->first();
         // dd($passport_info->id);
 
         if ($vehicle_info->vehicle_no == $this->vehicle_no) {
@@ -76,9 +76,9 @@ class Vehicle extends Component
         sleep(2); // Simulating a delay
         $this->dispatch('alert', ['type' => 'success',  'message' => 'Vehicle Info has been updates successfully!']);
     }
-
+    
     public function render()
     {
-        return view('livewire.admin.employee.vehicle');
+        return view('livewire.component.employee.vehicle-info');
     }
 }

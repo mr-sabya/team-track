@@ -6,6 +6,7 @@
     </div>
     @endif
 
+    @if($isDatatable == true)
     <div class="row mb-3">
 
         <div class="col-md-6">
@@ -20,6 +21,7 @@
             <input type="text" class="form-control w-50" placeholder="Search..." wire:model.debounce.300ms="search">
         </div>
     </div>
+    @endif
 
     <table class="table table-striped table-bordered">
         <thead>
@@ -51,7 +53,7 @@
             <tr>
                 <td class="text-center">{{ $loop->index + 1 }}</td>
                 <td>{{ $item->first_name }} {{ $item->last_name }}</td>
-                <td>{{ $item->company['name'] }}</td>
+                <td>{{ $item->company['name'] ?? 'N/A' }}</td>
                 <td> {{ $item->passport['expiry_date'] }} </td>
                 <td> {{ $item->visa['expiry_date'] }} </td>
                 <td> {{ $item->emiratesInfo['expiry_date'] }} </td>
@@ -59,9 +61,15 @@
                 <td> {{ $item->vehicle['expiry_date'] }} </td>
                 <td> {{ $item->drivingLicense['expiry_date'] }} </td>
                 <td>
+                    @if($isCompanyRoute != null)
                     <a href="{{ route('company-dash.employee.edit', $item->id) }}" wire:navigate class="btn btn-primary btn-sm">
                         <i class="ri-edit-line"></i>
                     </a>
+                    @else
+                    <a href="{{ route('employee.edit', $item->id) }}" wire:navigate class="btn btn-primary btn-sm">
+                        <i class="ri-edit-line"></i>
+                    </a>
+                    @endif
                     <button class="btn btn-danger btn-sm" wire:click="confirmDelete({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#deleteModal">
                         <i class="ri-delete-bin-line"></i>
                     </button>
@@ -69,12 +77,13 @@
             </tr>
             @empty
             <tr>
-                <td colspan="3" class="text-center">No results found</td>
+                <td colspan="10" class="text-center">No results found</td>
             </tr>
             @endforelse
         </tbody>
     </table>
 
+    @if($isDatatable == true)
     <div class="{{ !$data->hasMorePages() ? 'd-flex justify-content-between' : '' }}">
         @if(!$data->hasMorePages())
         <div>
@@ -85,7 +94,7 @@
             {{ $data->links() }}
         </div>
     </div>
-
+    @endif
 
 
     <!-- Delete Confirmation Modal -->

@@ -12,7 +12,8 @@
                     <a href="{{{ route('employee.create') }}}" wire:navigate class="btn btn-primary"><i class="ri-add-line"></i> Add {{ $title }}</a>
                 </div>
                 <div class="card-body">
-                    <livewire:admin.employee.index />
+                    <!-- employee list component -->
+                    <livewire:component.employee.index isDatatable="1" />
                 </div>
             </div>
         </div>

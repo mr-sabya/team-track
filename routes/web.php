@@ -50,6 +50,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // 
     Route::get('insurance-type', [App\Http\Controllers\Admin\InsuranceTypeController::class, 'index'])->name('insurance.index');
+    Route::get('insurance-type/trash', [App\Http\Controllers\Admin\InsuranceTypeController::class, 'trash'])->name('insurance.trash');
 
 
     // role
