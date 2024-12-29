@@ -51,7 +51,7 @@
             <tr>
                 <td class="text-center">{{ $loop->index + 1 }}</td>
                 <td>{{ $item->first_name }} {{ $item->last_name }}</td>
-                <td>{{ $item->company['name'] }}</td>
+                <td>{{ $item->company['name'] ?? 'N/A' }}</td>
                 <td> {{ $item->passport['expiry_date'] }} </td>
                 <td> {{ $item->visa['expiry_date'] }} </td>
                 <td> {{ $item->emiratesInfo['expiry_date'] }} </td>

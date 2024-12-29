@@ -69,7 +69,7 @@ class Edit extends Component
 
             $this->dispatch('alert', ['type' => 'success',  'message' => 'Employee has been created successfully!']);
 
-            return $this->redirect(route('employee.index'), navigate: true);
+            // return $this->redirect(route('employee.index'), navigate: true);
         } catch (\Exception $e) {
             $this->dispatch('alert', ['type' => 'error',  'message' => 'An error occurred: ' . $e->getMessage()]);
         }

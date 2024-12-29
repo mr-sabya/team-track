@@ -37,7 +37,7 @@
                                 @endif
                             </li>
                             <li><strong>Address:</strong> {{ $employee->address }}</li>
-                            <li><strong>Country:</strong> {{ $employee->country['name'] }}</li>
+                            <li><strong>Country:</strong> {{ $employee->country['name'] ?? 'N/A' }}</li>
                         </ul>
 
                     </div>
