@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UserDataExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeController extends Controller
 {
@@ -26,6 +28,15 @@ class EmployeeController extends Controller
         //
         $title = "Employee";
         return view('admin.employee.create', compact('title'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function addBulk()
+    {
+        //
+        $title = "Employee";
+        return view('admin.employee.bulk', compact('title'));
     }
 
 
@@ -83,5 +94,25 @@ class EmployeeController extends Controller
     {
         $employee = User::findOrFail(intval($id));
         return view('admin.employee.insurance', compact('employee'));
+    }
+
+    // Insurance Info
+    public function extras($id)
+    {
+        $employee = User::findOrFail(intval($id));
+        return view('admin.employee.extra', compact('employee'));
+    }
+
+
+    // download demo excel data
+    public function demoExcelData()
+    {
+        return Excel::download(new UserDataExport, 'user_data.xlsx');
+    }
+
+    // download demo csv file
+    public function demoCSVData()
+    {
+        return Excel::download(new UserDataExport, 'user_data.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 }

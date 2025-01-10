@@ -36,7 +36,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('employee.index');
 
     Route::prefix('employee')->as('employee.')->group(function () {
+
+        Route::get('download-demo-excel', [App\Http\Controllers\Admin\EmployeeController::class, 'demoExcelData'])->name('download-demo-excel');
+        Route::get('download-demo-csv', [App\Http\Controllers\Admin\EmployeeController::class, 'demoCSVData'])->name('download-demo-csv');
+
+
         Route::get('create', [App\Http\Controllers\Admin\EmployeeController::class, 'create'])->name('create');
+        Route::get('bulk-add', [App\Http\Controllers\Admin\EmployeeController::class, 'addBulk'])->name('bulk');
+
         Route::get('edit/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'edit'])->name('edit');
 
         Route::get('visa/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'visaInfo'])->name('visa');
@@ -45,6 +52,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('driving-license/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'DrivingLicense'])->name('driving-license');
         Route::get('emirates-info/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'EmiratesInfo'])->name('emirates');
         Route::get('insurance-info/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'InsuranceInfo'])->name('insurance');
+        Route::get('extras/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'extras'])->name('extras');
     });
 
 

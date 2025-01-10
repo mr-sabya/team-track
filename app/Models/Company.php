@@ -26,5 +26,18 @@ class Company extends Model
         'wifi_bills',
         'sewerage_bills',
         'mobile_bills',
+
+        'logo',
+        'email',
+        'phone',
+        'address',
+        'salution',
+        'signature',
     ];
+
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

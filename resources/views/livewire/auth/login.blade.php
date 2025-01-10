@@ -1,7 +1,5 @@
 <div class="mx-3">
 
-
-
     <form class="form-horizontal mt-3 " action="" wire:submit.prevent="login">
 
         <div class="form-group mb-3">

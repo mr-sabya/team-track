@@ -9,6 +9,13 @@ class Vehicle extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'vehicle_no',
+        'issue_date',
+        'expiry_date',
+        'image',
+    ];
 
     public function user()
     {

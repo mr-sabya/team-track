@@ -75,3 +75,15 @@
 .list-unstyled li{
     margin-bottom: 10px;
 }
+
+
+/* side -menu */
+.side-menu .active{
+    background: #04a2b3;
+    color: #fff;
+}
+
+.side-menu .nav-item .nav-link:hover{
+    background: #04a2b3;
+    color: #fff;
+}

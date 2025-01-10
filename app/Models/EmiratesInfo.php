@@ -9,6 +9,14 @@ class EmiratesInfo extends Model
 {
     use HasFactory;
 
+    
+    protected $fillable = [
+        'user_id',
+        'emirates_id_no',
+        'card_no',
+        'expiry_date',
+        'image',
+    ];
 
     public function user()
     {
