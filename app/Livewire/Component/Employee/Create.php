@@ -36,6 +36,7 @@ class Create extends Component
 
     public function submit()
     {
+        // dd($this->company_id);
         $rules = [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -52,8 +53,7 @@ class Create extends Component
         $this->validate($rules);
 
         try {
-            $user = User::create([
-                'company_id' =>  $this->companyId ?? $this->company_id,
+            $data = [
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email' => $this->email,
@@ -61,7 +61,15 @@ class Create extends Component
                 'date_of_birth' => $this->date_of_birth,
                 'is_employee' => 1,
                 'password' => Hash::make($this->password),
-            ]);
+            ];
+
+            if($this->companyId){
+                $data['company_id'] = $this->companyId;
+            }else{
+                $data['company_id'] = $this->company_id;
+            }
+
+            $user = User::create($data);
 
             // visa
             $visa = new Visa();

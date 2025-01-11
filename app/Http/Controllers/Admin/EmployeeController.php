@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\UserDataExport;
 use App\Http\Controllers\Controller;
+use App\Imports\UserDataImport;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeController extends Controller
@@ -81,7 +83,7 @@ class EmployeeController extends Controller
         $employee = User::findOrFail(intval($id));
         return view('admin.employee.driving-license', compact('employee'));
     }
-    
+
     // Emirates Info
     public function EmiratesInfo($id)
     {
@@ -114,5 +116,26 @@ class EmployeeController extends Controller
     public function demoCSVData()
     {
         return Excel::download(new UserDataExport, 'user_data.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+
+
+    // upload file
+    public function uploadData(Request $request)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,csv|max:2048', // Maximum 2MB
+        ]);
+
+        // Try to import the file
+        try {
+            Excel::import(new UserDataImport, $request->file('file')); // Corrected to retrieve the file
+            return back()->with('success', 'File imported successfully!');
+        } catch (\Exception $e) {
+            // Log the error and return an error message
+            Log::error('File import failed: ' . $e->getMessage());
+            return back()->with('error', 'Error occurred while importing the file!');
+        }
     }
 }

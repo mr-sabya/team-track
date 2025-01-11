@@ -62,6 +62,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+
+        'company_id' => 'integer',  // Ensure it's always treated as an integer
     ];
 
     public function country()

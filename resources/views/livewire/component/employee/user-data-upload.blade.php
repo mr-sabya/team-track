@@ -3,19 +3,19 @@
     <div class="col-lg-6">
         <div class="border p-5">
             <div>
-                <form wire:submit.prevent="upload">
+                <form wire:submit.prevent="uploadData" enctype="multipart/form-data">
 
                     <div class="form-group mb-3">
                         <label for="file">Upload File</label>
-                        <input type="file" wire:model="file" class="form-control">
+                        <input type="file" wire:model="file" class="form-control" name="file">
                         <span>**Upload csv/xlsx file</span>
                         @error('file') <span class="error">{{ $message }}</span> @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 mb-3">Upload</button>
-                    <a href="{{ route('employee.download-demo-excel') }}" class="btn btn-dark w-100 mb-3">Download Demo XLSX</a>
-                    <a href="{{ route('employee.download-demo-csv') }}" class="btn btn-dark w-100">Download Demo CSV</a>
                 </form>
+                <a href="{{ route('employee.download-demo-excel') }}" class="btn btn-dark w-100 mb-3">Download Demo XLSX</a>
+                <a href="{{ route('employee.download-demo-csv') }}" class="btn btn-dark w-100">Download Demo CSV</a>
 
                 @if (session()->has('message'))
                 <div>{{ session('message') }}</div>

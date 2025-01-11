@@ -40,6 +40,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('download-demo-excel', [App\Http\Controllers\Admin\EmployeeController::class, 'demoExcelData'])->name('download-demo-excel');
         Route::get('download-demo-csv', [App\Http\Controllers\Admin\EmployeeController::class, 'demoCSVData'])->name('download-demo-csv');
 
+        Route::post('upload-data', [App\Http\Controllers\Admin\EmployeeController::class, 'uploadData'])->name('upload');
+
 
         Route::get('create', [App\Http\Controllers\Admin\EmployeeController::class, 'create'])->name('create');
         Route::get('bulk-add', [App\Http\Controllers\Admin\EmployeeController::class, 'addBulk'])->name('bulk');
