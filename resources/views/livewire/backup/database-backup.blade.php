@@ -1,7 +1,18 @@
 <div>
     <div class="d-flex justify-content-between mb-3">
         <h3>Database Backups</h3>
-        <button class="btn btn-primary" wire:click="createBackup">Create Backup</button>
+        <div>
+            <button class="btn btn-primary" wire:click="createBackup" wire:loading.attr="disabled">
+                @if($isBackingUp)
+                Creating Backup...
+                @else
+                Create Backup
+                @endif
+            </button>
+            <div wire:loading wire:target="createBackup" style="height: 34px;">
+                <img src="{{ url('assets/images/loading.gif') }}" alt="" style="height: 100%;">
+            </div>
+        </div>
     </div>
 
     @if (session()->has('success'))

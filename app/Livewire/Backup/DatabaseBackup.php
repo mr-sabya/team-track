@@ -13,6 +13,7 @@ class DatabaseBackup extends Component
 {
 
     public $backups = [];
+    public $isBackingUp = false;  // Property to track backup status
 
     public function mount()
     {
@@ -21,17 +22,27 @@ class DatabaseBackup extends Component
 
     public function loadBackups()
     {
-        $this->backups = Storage::disk('local')->files('laravel-backups');
+        $this->backups = Storage::disk('local')->files('Laravel');
     }
 
     public function createBackup()
     {
         try {
-            Artisan::queue('backup:run', ['--only-db' => true]);
-            dd(Artisan::output());
-            session()->flash('success', 'Backup created successfully!');
+            $this->isBackingUp = true;
+
+            $command = 'php ' . base_path('artisan') . ' backup:run';
+            $output = shell_exec($command);
+
+            // Check if the backup was successful
+            if ($output) {
+                $this->dispatch('alert', ['type' => 'success',  'message' => 'Backup created successfully!']);
+            } else {
+                $this->dispatch('alert', ['type' => 'success',  'message' => 'Backup Failed!']);
+            }
         } catch (\Exception $e) {
-            session()->flash('error', 'Backup failed: ' . $e->getMessage());
+            $this->dispatch('alert', ['type' => 'success',  'message' => 'Backup Failed!' . $e->getMessage()]);
+        } finally {
+            $this->isBackingUp = false;  // Set status to false when backup finishes
         }
 
         $this->loadBackups();
@@ -51,7 +62,8 @@ class DatabaseBackup extends Component
     public function deleteBackup($file)
     {
         Storage::disk('local')->delete($file);
-        session()->flash('success', 'Backup deleted successfully!');
+        $this->dispatch('alert', ['type' => 'success',  'message' => 'Backup deleted successfully!']);
+
         $this->loadBackups();
     }
 

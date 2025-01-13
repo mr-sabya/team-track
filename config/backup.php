@@ -153,7 +153,7 @@ return [
             'disks' => [
                 'local',
             ],
-            'path' => 'laravel-backups',
+            
 
         ],
 
