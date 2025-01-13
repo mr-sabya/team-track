@@ -21,6 +21,12 @@ class EmployeeController extends Controller
         $title = "Employee";
         return view('admin.employee.index', compact('title'));
     }
+    public function filterData()
+    {
+        //
+        $title = "Employee";
+        return view('admin.employee.filter', compact('title'));
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -74,6 +74,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('employee.index') }}" wire:navigate>Employee List</a></li>
+                        <li><a href="{{ route('employee.filterData') }}" wire:navigate>Filter Employee</a></li>
                         <li><a href="{{ route('employee.create') }}" wire:navigate>Add Employee</a></li>
 
                     </ul>
@@ -98,6 +99,17 @@
                         <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                     </ul>
                 </li>
+
+                @if( Auth::user()->is_superadmin)
+                <li>
+                    <a href="{{ route('backup.index') }}" wire:navigate class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>Backup</span>
+                    </a>
+                </li>
+                @endif
+
+                <!-- company -->
 
                 @elseif(Auth::user()->is_company)
                 <li class="{{ Route::is('company-dash.home') ? 'mm-active' : '' }}">

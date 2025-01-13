@@ -34,6 +34,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // employee
     Route::get('employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('employee.index');
+    Route::get('employees/filter', [App\Http\Controllers\Admin\EmployeeController::class, 'filterData'])->name('employee.filterData');
 
     Route::prefix('employee')->as('employee.')->group(function () {
 
@@ -66,6 +67,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // role
     Route::get('roles', [App\Http\Controllers\Admin\RoleController::class, 'index'])->name('role.index');
     Route::get('permissions', [App\Http\Controllers\Admin\PermissionController::class, 'index'])->name('permission.index');
+
+    // backup
+    Route::get('backup', [App\Http\Controllers\Admin\BackupController::class, 'index'])->name('backup.index');
 });
 
 Route::prefix('employee-dash')->as('employee-dash.')->middleware(['auth'])->group(function () {
