@@ -12,8 +12,11 @@ use Livewire\WithFileUploads;
 class DatabaseBackup extends Component
 {
 
+    use WithFileUploads;
+
     public $backups = [];
-    public $isBackingUp = false;  // Property to track backup status
+    public $isBackingUp = false;
+    public $restoreFile;
 
     public function mount()
     {
@@ -43,28 +46,56 @@ class DatabaseBackup extends Component
             $this->dispatch('alert', ['type' => 'success',  'message' => 'Backup Failed!' . $e->getMessage()]);
         } finally {
             $this->isBackingUp = false;  // Set status to false when backup finishes
+            $this->loadBackups();
         }
-
-        $this->loadBackups();
     }
 
     public function downloadBackup($file)
     {
-        if (Storage::disk('local')->exists($file)) {
-            return response()->streamDownload(function () use ($file) {
-                echo Storage::disk('local')->get($file);
-            }, basename($file));
-        } else {
-            session()->flash('error', 'File does not exist!');
+        if (Storage::exists($file)) {
+            return Storage::download($file);
         }
+
+        session()->flash('error', 'File does not exist!');
     }
 
     public function deleteBackup($file)
     {
         Storage::disk('local')->delete($file);
-        $this->dispatch('alert', ['type' => 'success',  'message' => 'Backup deleted successfully!']);
+        $this->dispatchBrowserEvent('alert', [
+            'type' => 'success',
+            'message' => 'Backup deleted successfully!',
+        ]);
 
         $this->loadBackups();
+    }
+
+    public function restoreBackup()
+    {
+        $this->validate([
+            'restoreFile' => 'required|file|max:51200', // Max file size in KB (50MB)
+        ]);
+
+        $path = $this->restoreFile->storeAs('Laravel', $this->restoreFile->getClientOriginalName(), 'local');
+
+        try {
+            $restoreFilePath = storage_path('app/' . $path);
+            Artisan::call('db:restore', [
+                '--file' => $restoreFilePath,
+            ]);
+
+            $this->restoreFile = '';
+
+            $this->dispatch('alert', [
+                'type' => 'success',
+                'message' => 'Backup restored successfully!',
+            ]);
+        } catch (\Exception $e) {
+            $this->dispatch('alert', [
+                'type' => 'error',
+                'message' => 'Restore failed: ' . $e->getMessage(),
+            ]);
+        }
     }
 
     public function render()
