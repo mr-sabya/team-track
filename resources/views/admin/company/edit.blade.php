@@ -6,13 +6,14 @@
 
     <div class="row">
         <div class="col-lg-8">
+            <livewire:admin.company.menu companyId="{{ $company->id }}" />
             <div class="card">
                 <div class="card-header">
-                    <h3>Edit {{ $title }}</h3>
+                    <h3>Edit Dates - <strong>{{ $company->name }}</strong></h3>
                 </div>
 
                 <div class="card-body">
-                    <livewire:admin.company.edit id="{{ $id }}" />
+                    <livewire:component.company.edit id="{{ $company->id }}" />
                 </div>
             </div>
         </div>

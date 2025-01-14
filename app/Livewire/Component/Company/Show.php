@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Admin\Company;
+namespace App\Livewire\Component\Company;
 
-use App\Models\Company;
+use App\Models\User;
 use Livewire\Component;
-use Livewire\Features\SupportPagination\WithoutUrlPagination;
+use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Show extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
@@ -16,6 +16,7 @@ class Index extends Component
     public $sortDirection = 'asc'; // Default sort direction
     public $perPage = 10; // Items per page
     public $deleteId = null; // Holds the ID of the record to delete
+    public $companyId; // Holds the ID of the record to delete
 
     protected $queryString = ['search', 'sortField', 'sortDirection', 'perPage'];
 
@@ -51,22 +52,27 @@ class Index extends Component
     public function delete()
     {
         if ($this->deleteId) {
-            Company::findOrFail($this->deleteId)->delete(); // Replace User with your model
+            User::findOrFail($this->deleteId)->delete(); // Replace User with your model
             $this->deleteId = null;
             session()->flash('message', 'Record deleted successfully!');
         }
     }
 
+
+    public function mount($id)
+    {
+        $this->companyId = $id;
+    }
+
     public function render()
     {
-        $data = Company::query() // Replace with your model
-            ->where('name', 'like', '%' . $this->search . '%') // Adjust the column
+        $data = User::query() // Replace with your model
+            ->where('is_employee', 1)
+            ->where('first_name', 'like', '%' . $this->search . '%') // Adjust the column
+            ->where('company_id', $this->companyId) // Adjust the column
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-       
-        return view('livewire.admin.company.index', [
-            'data' => $data,
-        ]);
+        return view('livewire.component.company.show', ['data' => $data]);
     }
 }

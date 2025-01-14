@@ -34,8 +34,25 @@ class CompanyController extends Controller
     public function edit($id)
     {
         //
+        $company = Company::findOrFail(intval($id));
         $title = "Company";
-        return view('admin.company.edit', compact('id', 'title'));
+        return view('admin.company.edit', compact('company', 'title'));
+    }
+
+    // edit basic info  
+    public function editBasicInfo($id)
+    {
+        $company = Company::findOrFail(intval($id));
+        $title = "Company";
+        return view('admin.company.basic', compact('company', 'title'));
+    }
+
+    // attachment
+    public function attachment($id)
+    {
+        $company = Company::findOrFail(intval($id));
+        $title = "Company";
+        return view('admin.company.attachment', compact('company', 'title'));
     }
 
     // show

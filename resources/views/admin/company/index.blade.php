@@ -12,7 +12,7 @@
                     <a href="{{{ route('company.create') }}}" wire:navigate class="btn btn-primary"><i class="ri-add-line"></i> Add {{ $title }}</a>
                 </div>
                 <div class="card-body">
-                    <livewire:admin.company.index />
+                    <livewire:component.company.index />
                 </div>
             </div>
         </div>

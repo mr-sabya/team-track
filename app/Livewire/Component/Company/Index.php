@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Company;
+namespace App\Livewire\Component\Company;
 
-use App\Models\User;
+use App\Models\Company;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class Show extends Component
+class Index extends Component
 {
+
     use WithPagination, WithoutUrlPagination;
 
     public $search = '';
@@ -16,7 +17,6 @@ class Show extends Component
     public $sortDirection = 'asc'; // Default sort direction
     public $perPage = 10; // Items per page
     public $deleteId = null; // Holds the ID of the record to delete
-    public $companyId; // Holds the ID of the record to delete
 
     protected $queryString = ['search', 'sortField', 'sortDirection', 'perPage'];
 
@@ -52,28 +52,22 @@ class Show extends Component
     public function delete()
     {
         if ($this->deleteId) {
-            User::findOrFail($this->deleteId)->delete(); // Replace User with your model
+            Company::findOrFail($this->deleteId)->delete(); // Replace User with your model
             $this->deleteId = null;
             session()->flash('message', 'Record deleted successfully!');
         }
     }
 
-
-    public function mount($id)
-    {
-        $this->companyId = $id;
-    }
-
     public function render()
     {
-        $data = User::query() // Replace with your model
-            ->where('is_employee', 1)
-            ->where('first_name', 'like', '%' . $this->search . '%') // Adjust the column
-            ->where('company_id', $this->companyId) // Adjust the column
+        $data = Company::query() // Replace with your model
+            ->where('name', 'like', '%' . $this->search . '%') // Adjust the column
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.admin.company.show', ['data' => $data]);
-    }
 
+        return view('livewire.component.company.index', [
+            'data' => $data,
+        ]);
+    }
 }

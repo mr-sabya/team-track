@@ -28,7 +28,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // company
     Route::get('companies', [App\Http\Controllers\Admin\CompanyController::class, 'index'])->name('company.index');
     Route::get('company/create', [App\Http\Controllers\Admin\CompanyController::class, 'create'])->name('company.create');
-    Route::get('company/edit/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'edit'])->name('company.edit');
+    Route::get('company/edit-dates/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'edit'])->name('company.edit');
+    Route::get('company/edit-basic-info/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'editBasicInfo'])->name('company.edit-basic-info');
+    Route::get('company/attachment/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'attachment'])->name('company.attachment');
     Route::get('company/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'show'])->name('company.show');
 
 

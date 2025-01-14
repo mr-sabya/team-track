@@ -6,13 +6,14 @@
 
     <div class="row">
         <div class="col-lg-8">
+            <livewire:admin.company.menu companyId="{{ $company->id }}" />
             <div class="card">
                 <div class="card-header">
-                    <h3>Add New {{ $title }}</h3>
+                    <h3>Attachment - <strong>{{ $company->name }}</strong></h3>
                 </div>
 
                 <div class="card-body">
-                    <livewire:component.company.create />
+                    <livewire:component.company.attachment companyId="{{ $company->id }}" />
                 </div>
             </div>
         </div>

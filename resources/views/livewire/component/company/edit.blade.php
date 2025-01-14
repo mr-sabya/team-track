@@ -3,11 +3,7 @@
         <div class="row">
             <!-- Column 1 -->
             <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" id="name" class="form-control" wire:model.defer="name">
-                    @error('name') <span class="text-danger">{{ $message }}</span> @enderror
-                </div>
+
                 <div class="mb-3">
                     <label for="trade_license" class="form-label">Trade License</label>
                     <input type="date" id="trade_license" class="form-control" wire:model.defer="trade_license">
@@ -28,14 +24,15 @@
                     <input type="date" id="domain_subscriptions" class="form-control" wire:model.defer="domain_subscriptions">
                     @error('domain_subscriptions') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
-            </div>
-            <!-- Column 2 -->
-            <div class="col-md-6">
                 <div class="mb-3">
                     <label for="tenancy_agreement" class="form-label">Tenancy Agreement</label>
                     <input type="date" id="tenancy_agreement" class="form-control" wire:model.defer="tenancy_agreement">
                     @error('tenancy_agreement') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
+            </div>
+            <!-- Column 2 -->
+            <div class="col-md-6">
+
                 <div class="mb-3">
                     <label for="electricity_bills" class="form-label">Electricity Bills</label>
                     <input type="date" id="electricity_bills" class="form-control" wire:model.defer="electricity_bills">

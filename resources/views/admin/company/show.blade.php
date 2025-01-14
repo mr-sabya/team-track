@@ -11,7 +11,7 @@
                     <h3>Employee List: {{ $company->name }}</h3>
                 </div>
                 <div class="card-body">
-                    <livewire:admin.company.show id="{{ $company->id }}"/>
+                    <livewire:component.company.show id="{{ $company->id }}"/>
                 </div>
             </div>
         </div>
