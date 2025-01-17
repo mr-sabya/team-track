@@ -53,7 +53,7 @@ class Edit extends Component
             ]);
 
             $this->dispatch('alert', ['type' => 'success',  'message' => 'Company has been updated successfully!']);
-            return $this->redirect(route('company.index'), navigate: true);
+            $this->dispatch('companyUpdated');
         } catch (\Exception $e) {
             $this->dispatch('alert', ['type' => 'error',  'message' => 'Something went wrong!']);
         }

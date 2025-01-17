@@ -40,8 +40,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::prefix('employee')->as('employee.')->group(function () {
 
-        Route::get('download-demo-excel', [App\Http\Controllers\Admin\EmployeeController::class, 'demoExcelData'])->name('download-demo-excel');
-        Route::get('download-demo-csv', [App\Http\Controllers\Admin\EmployeeController::class, 'demoCSVData'])->name('download-demo-csv');
 
         Route::post('upload-data', [App\Http\Controllers\Admin\EmployeeController::class, 'uploadData'])->name('upload');
 
@@ -74,6 +72,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('backup', [App\Http\Controllers\Admin\BackupController::class, 'index'])->name('backup.index');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('download-demo-excel', [App\Http\Controllers\Admin\EmployeeController::class, 'demoExcelData'])->name('download-demo-excel');
+    Route::get('download-demo-csv', [App\Http\Controllers\Admin\EmployeeController::class, 'demoCSVData'])->name('download-demo-csv');
+});
+
 Route::prefix('employee-dash')->as('employee-dash.')->middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\Employee\HomeController::class, 'index'])->name('home');
 
@@ -86,6 +89,7 @@ Route::prefix('employee-dash')->as('employee-dash.')->middleware(['auth'])->grou
     Route::get('insurance-info', [App\Http\Controllers\Employee\HomeController::class, 'InsuranceInfo'])->name('insurance');
 
 
+
     Route::get('change-password', [App\Http\Controllers\Employee\HomeController::class, 'password'])->name('password');
 });
 
@@ -93,7 +97,9 @@ Route::prefix('employee-dash')->as('employee-dash.')->middleware(['auth'])->grou
 Route::prefix('company-dash')->as('company-dash.')->middleware(['auth', 'company'])->group(function () {
     Route::get('/', [App\Http\Controllers\Company\HomeController::class, 'index'])->name('home');
 
-    Route::get('/company-profile', [App\Http\Controllers\Company\ProfileController::class, 'index'])->name('profile');
+    Route::get('/company-profile', [App\Http\Controllers\Company\ProfileController::class, 'editBasicInfo'])->name('edit-basic-info');
+    Route::get('/company-profile/dates', [App\Http\Controllers\Company\ProfileController::class, 'index'])->name('profile');
+    Route::get('/company-profile/attachment', [App\Http\Controllers\Company\ProfileController::class, 'attachment'])->name('attachment');
 
 
     // employee
@@ -101,6 +107,7 @@ Route::prefix('company-dash')->as('company-dash.')->middleware(['auth', 'company
 
     Route::prefix('employee')->as('employee.')->group(function () {
         Route::get('create', [App\Http\Controllers\Company\EmployeeController::class, 'create'])->name('create');
+        Route::get('bulk-add', [App\Http\Controllers\Company\EmployeeController::class, 'addBulk'])->name('bulk');
         Route::get('edit/{id}', [App\Http\Controllers\Company\EmployeeController::class, 'edit'])->name('edit');
 
         Route::get('visa/{id}', [App\Http\Controllers\Company\EmployeeController::class, 'visaInfo'])->name('visa');
@@ -109,5 +116,6 @@ Route::prefix('company-dash')->as('company-dash.')->middleware(['auth', 'company
         Route::get('driving-license/{id}', [App\Http\Controllers\Company\EmployeeController::class, 'DrivingLicense'])->name('driving-license');
         Route::get('emirates-info/{id}', [App\Http\Controllers\Company\EmployeeController::class, 'EmiratesInfo'])->name('emirates');
         Route::get('insurance-info/{id}', [App\Http\Controllers\Company\EmployeeController::class, 'InsuranceInfo'])->name('insurance');
+        Route::get('extras/{id}', [App\Http\Controllers\Company\EmployeeController::class, 'extras'])->name('extras');
     });
 });

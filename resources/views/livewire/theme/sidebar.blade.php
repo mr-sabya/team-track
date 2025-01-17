@@ -127,12 +127,13 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('company-dash.employee.index') }}" wire:navigate>Employee List</a></li>
                         <li><a href="{{ route('company-dash.employee.create') }}" wire:navigate>Add Employee</a></li>
+                        <li><a href="{{ route('company-dash.employee.bulk') }}" wire:navigate>Add Bulk</a></li>
 
                     </ul>
                 </li>
 
                 <li>
-                    <a href="{{ route('company-dash.profile') }}" wire:navigate class=" waves-effect">
+                    <a href="{{ route('company-dash.edit-basic-info') }}" wire:navigate class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
                         <span>Company Profile</span>
                     </a>

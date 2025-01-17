@@ -4,6 +4,7 @@ namespace App\Livewire\Component\Employee;
 
 use App\Exports\UserDataExport;
 use App\Imports\UserDataImport;
+use App\Models\Company;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,39 +15,52 @@ class UserDataUpload extends Component
     use WithFileUploads;
 
     public $file;
+    public $companyId; // Nullable, set externally if needed
+    public $companies; // List of companies for the dropdown
 
     // Validation rules for the uploaded file
     // protected $rules = [];
 
+    public function mount($companyId = null)
+    {
+        $this->companyId = $companyId; // Use the provided companyId or null
+        $this->companies = $this->companyId ? [] : Company::all(); // Load companies only if no companyId is passed
+    }
+
     public function uploadData()
     {
-        // dd($this->file);
         // Validate the file input
         $this->validate([
-            'file' => 'required|file|mimes:xlsx,csv|max:2048', // Max 2MB for example
+            'file' => 'required|file|mimes:xlsx,csv|max:2048',
         ]);
 
+        // If companyId is not set, validate the selection
+        if (!$this->companyId) {
+            $this->validate([
+                'companyId' => 'required|exists:companies,id',
+            ]);
+        }
+
+
         try {
-            
+            // Pass the companyId to the import logic
+            Excel::import(new UserDataImport($this->companyId), $this->file->getRealPath());
 
-            // Ensure we pass the temporary file path to Excel::import
-            Excel::import(new UserDataImport, $this->file);
+            // Reset file input
             $this->file = '';
+            if (!$this->companyId) {
+                $this->companyId = null; // Reset dropdown selection if needed
+            }
 
-            // Dispatch a success alert
+            // Dispatch success alert
             $this->dispatch('alert', ['type' => 'success', 'message' => 'User data uploaded successfully!']);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // Handle validation errors
-            $this->dispatch('alert', ['type' => 'error', 'message' => 'Invalid file uploaded!'. $e->getMessage()]);
-            Log::error('File upload error: ' . $e->getMessage());
         } catch (\Exception $e) {
-            // Log the actual error for debugging
+            // Handle errors and dispatch an alert
+            $this->dispatch('alert', ['type' => 'error', 'message' => 'Error uploading file: ' . $e->getMessage()]);
             Log::error('File upload error: ' . $e->getMessage());
-
-            // Dispatch a generic error alert
-            $this->dispatch('alert', ['type' => 'error', 'message' => 'Error to upload file!'. $e->getMessage()]);
         }
     }
+
 
 
     public function demoExcelData()

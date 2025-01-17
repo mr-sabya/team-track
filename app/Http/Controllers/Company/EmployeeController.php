@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -28,6 +30,17 @@ class EmployeeController extends Controller
         return view('company.employee.create', compact('title'));
     }
 
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function addBulk()
+    {
+        //
+        $title = "Employee";
+        $company = Company::where('id', Auth::user()->company_id)->first();
+        return view('company.employee.bulk', compact('title', 'company'));
+    }
 
 
     /**
@@ -70,7 +83,7 @@ class EmployeeController extends Controller
         $employee = User::findOrFail(intval($id));
         return view('company.employee.driving-license', compact('employee'));
     }
-    
+
     // Emirates Info
     public function EmiratesInfo($id)
     {
@@ -84,4 +97,15 @@ class EmployeeController extends Controller
         $employee = User::findOrFail(intval($id));
         return view('company.employee.insurance', compact('employee'));
     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function extras($id)
+    {
+        //
+        $employee = User::findOrFail(intval($id));
+        return view('company.employee.extra', compact('employee'));
+    }
+    
 }
