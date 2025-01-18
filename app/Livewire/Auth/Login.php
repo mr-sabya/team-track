@@ -83,8 +83,8 @@ class Login extends Component
     public function employeeLogin()
     {
         $data = [
-            'email' => 'sabya.ciweb@gmail.com',
-            'password' => 'sabya12345',
+            'email' => 'jane.smith@example.com',
+            'password' => 'password456',
             'is_employee' => 1,
         ];
 

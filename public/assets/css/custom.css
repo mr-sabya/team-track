@@ -47,17 +47,47 @@
 
 
 /* profile */
-.profile-img {
+.bg-profile-header .image{
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.image-uploader{
+    position: relative;
+}
+
+.image-uploader .uploader{
+    position: absolute;
+    background: #ffffff8e;
+    color: #000;
+    width: 100%;
+    padding: 5px 10px;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.bg-profile-header .image .change-button{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+    width: 100%;
 }
 
 .bg-profile-header {
-    background: linear-gradient(to right, #007bff, #6c757d);
+    background: #505d69;
     color: #fff;
 }
 

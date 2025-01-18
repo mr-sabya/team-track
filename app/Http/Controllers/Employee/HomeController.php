@@ -66,6 +66,14 @@ class HomeController extends Controller
         return view('employee.profile.insurance', compact('employee'));
     }
 
+    // add estra fields
+    // Insurance Info
+    public function extras()
+    {
+        $employee = Auth::user();
+        return view('employee.profile.extra', compact('employee'));
+    }
+
 
 
     // change password
@@ -74,4 +82,5 @@ class HomeController extends Controller
         $employee = Auth::user();
         return view('employee.auth.password', compact('employee'));
     }
+    
 }

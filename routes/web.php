@@ -87,6 +87,7 @@ Route::prefix('employee-dash')->as('employee-dash.')->middleware(['auth'])->grou
     Route::get('driving-license', [App\Http\Controllers\Employee\HomeController::class, 'DrivingLicense'])->name('driving-license');
     Route::get('emirates-info', [App\Http\Controllers\Employee\HomeController::class, 'EmiratesInfo'])->name('emirates');
     Route::get('insurance-info', [App\Http\Controllers\Employee\HomeController::class, 'InsuranceInfo'])->name('insurance');
+    Route::get('extras', [App\Http\Controllers\Employee\HomeController::class, 'extras'])->name('extras');
 
 
 

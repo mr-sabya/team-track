@@ -5,11 +5,12 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-lg-8">
-            <div class="d-flex justify-content-end">
+        <div class="col-lg-2">
+            <div class="card">
                 <livewire:employee.profile.menu id="{{ $employee->id }}" />
             </div>
-
+        </div>
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
                     <h3>Basic Info ({{ $employee->first_name }} {{ $employee->last_name }})</h3>

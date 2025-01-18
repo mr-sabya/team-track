@@ -34,6 +34,7 @@ class User extends Authenticatable
         'gender',
         'phone',
         'address',
+        'image',
 
         // user
         'is_superadmin',
