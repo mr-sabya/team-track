@@ -19,8 +19,29 @@ class EmployeeController extends Controller
     {
         //
         $title = "Employee";
-        return view('admin.employee.index', compact('title'));
+        $trash = User::onlyTrashed()->where('is_employee', 1)->count();
+        return view('admin.employee.index', compact('title', 'trash'));
     }
+
+    // for trash
+    public function trash()
+    {
+        $title = "Employee";
+        return view('admin.employee.trash', compact('title'));
+    }
+
+
+    // This method is used to fetch the count of trashed users
+    public function trashCounter()
+    {
+        $trashCount = User::where('is_employee', 1)
+            ->onlyTrashed()  // This ensures we only count soft-deleted users
+            ->count();
+
+        // Return the count as a JSON response
+        return response()->json(['trash_count' => $trashCount]);
+    }
+
     public function filterData()
     {
         //

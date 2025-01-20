@@ -17,18 +17,17 @@
     <!-- Icons Css -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
-    @rappasoftTableStyles
-
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}">
 
     <!-- App Css-->
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
     @livewireStyles
 
 </head>
 
-<body data-sidebar="dark">
+<body data-sidebar="dark" style="position: relative;">
 
     <!-- <body data-layout="horizontal" data-topbar="light"> -->
 
@@ -56,8 +55,6 @@
             </div>
             <!-- End Page-content -->
 
-
-
         </div>
         <!-- end main content-->
 
@@ -65,7 +62,9 @@
     <!-- END layout-wrapper -->
 
 
+    <!-- Include the modal -->
 
+    <livewire:modal />
     <!-- JAVASCRIPT -->
     <script data-navigate-once src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script data-navigate-once src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -73,33 +72,16 @@
     <script data-navigate-once src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script data-navigate-once src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
-    <!-- Adds the Core Table Scripts -->
-    @rappasoftTableScripts
 
     <!-- toastr plugin -->
     <script data-navigate-once src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>
 
-    <script data-navigate-once src="{{ asset('assets/js/pages/index.init.js') }}"></script>
-
     <!-- App js -->
     <script data-navigate-once src="{{ asset('assets/js/app.js') }}"></script>
 
-
-    @if(Session::has('success'))
-    <script>
-        toastr['success']('{{ Session::get("success") }}');
-    </script>
-    @endif
-
-    @if(Session::has('error'))
-    <script>
-        toastr['error']('{{ Session::get("success") }}');
-    </script>
-    @endif
-
-
-
     @livewireScripts
+
+    @yield('scripts')
 
     <script>
         document.addEventListener('livewire:init', () => {
@@ -129,6 +111,8 @@
             });
         });
     </script>
+
+    
 
 </body>
 

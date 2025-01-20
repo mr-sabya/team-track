@@ -52,9 +52,24 @@ class Index extends Component
     public function delete()
     {
         if ($this->deleteId) {
-            Company::findOrFail($this->deleteId)->delete(); // Replace User with your model
-            $this->deleteId = null;
-            session()->flash('message', 'Record deleted successfully!');
+            // Find the company by ID, throw an exception if not found
+            $company = Company::findOrFail($this->deleteId);
+
+            // Check if the company has any employees
+            if ($company->users()->count() > 0) {  // Assuming 'users' is the relationship name for employees
+                // Dispatch error if employees are associated with the company
+                $this->dispatch('alert', ['type' => 'error', 'message' => 'Company cannot be deleted because it has employees.']);
+            } else {
+                // Delete the company if no employees are associated
+                $company->delete();
+
+                // Update the trash count after deletion
+                $this->dispatch('updateTrashCount');
+
+                // Clear the deleteId and show success alert
+                $this->deleteId = null;
+                $this->dispatch('alert', ['type' => 'success', 'message' => 'Company has been deleted successfully!']);
+            }
         }
     }
 

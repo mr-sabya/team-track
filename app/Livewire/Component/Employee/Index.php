@@ -70,14 +70,16 @@ class Index extends Component
     public function confirmDelete($id)
     {
         $this->deleteId = $id; // Set the record to be deleted
+        
     }
 
     public function delete()
     {
         if ($this->deleteId) {
             User::findOrFail($this->deleteId)->delete(); // Replace User with your model
+            $this->dispatch('updateTrashCount');
             $this->deleteId = null;
-            session()->flash('message', 'Record deleted successfully!');
+            $this->dispatch('alert', ['type' => 'success',  'message' => 'Employee has been deleted successfully!']);
         }
     }
 

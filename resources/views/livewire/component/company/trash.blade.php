@@ -6,9 +6,7 @@
     </div>
     @endif
 
-    @if($isDatatable == true)
     <div class="row mb-3">
-
         <div class="col-md-6">
             <select class="form-select w-auto d-inline-block" wire:model.live="perPage">
                 <option value="5">5</option>
@@ -21,7 +19,6 @@
             <input type="text" class="form-control w-50" placeholder="Search..." wire:model.debounce.300ms="search">
         </div>
     </div>
-    @endif
 
     <table class="table table-striped table-bordered">
         <thead>
@@ -32,70 +29,48 @@
                     <i class="ri-arrow-drop-{{ $sortDirection === 'asc' ? 'down' : 'up' }}-line"></i>
                     @endif
                 </th>
-                <th wire:click="sortBy('first_name')" class="table-click">
-                    Name
-                    @if ($sortField === 'first_name')
+                <th wire:click="sortBy('name')" class="table-click">
+                    Company Name
+                    @if ($sortField === 'name')
                     <i class="ri-arrow-drop-{{ $sortDirection === 'asc' ? 'down' : 'up' }}-line"></i>
                     @endif
                 </th>
-                <th>Company</th>
-                <th>Passport Expiry</th>
-                <th>Visa Expiry</th>
-                <th>Emirates ID Expiry</th>
-                <th>Insurance Expiry</th>
-                <th>Vehicle Expiry</th>
-                <th>Driving License Expiry</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($data as $item)
+            @forelse ($companies as $company)
             <tr>
-                <td class="text-center">{{ $loop->index + 1 }}</td>
-                <td>{{ $item->first_name }} {{ $item->last_name }}</td>
-                <td>{{ $item->company['name'] ?? 'N/A' }}</td>
-                <td> {{ $item->passport['expiry_date'] }} </td>
-                <td> {{ $item->visa['expiry_date'] }} </td>
-                <td> {{ $item->emiratesInfo['expiry_date'] }} </td>
-                <td> {{ $item->insuranceInfo['expiry_date'] }} </td>
-                <td> {{ $item->vehicle['expiry_date'] }} </td>
-                <td> {{ $item->drivingLicense['expiry_date'] }} </td>
+                <td class="text-center">{{ $loop->iteration }}</td>
+                <td>{{ $company->name }}</td>
                 <td>
-                    @if($isCompanyRoute != null)
-                    <a href="{{ route('company-dash.employee.edit', $item->id) }}" wire:navigate class="btn btn-primary btn-sm">
-                        <i class="ri-edit-line"></i>
-                    </a>
-                    @else
-                    <a href="{{ route('employee.edit', $item->id) }}" wire:navigate class="btn btn-primary btn-sm">
-                        <i class="ri-edit-line"></i>
-                    </a>
-                    @endif
-                    <button class="btn btn-danger btn-sm" wire:click="confirmDelete({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        <i class="ri-delete-bin-line"></i>
+                    <!-- Restore Button -->
+                    <button class="btn btn-primary btn-sm" wire:click="restore({{ $company->id }})">
+                        <i class="ri-refresh-line"></i> Restore
+                    </button>
+
+                    <!-- Delete Button -->
+                    <button class="btn btn-danger btn-sm" wire:click="confirmDelete({{ $company->id }})" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        <i class="ri-delete-bin-line"></i> Delete
                     </button>
                 </td>
             </tr>
             @empty
             <tr>
-                <td colspan="10" class="text-center">No results found</td>
+                <td colspan="3" class="text-center">No results found</td>
             </tr>
             @endforelse
         </tbody>
     </table>
 
-    @if($isDatatable == true)
-    <div class="{{ !$data->hasMorePages() ? 'd-flex justify-content-between' : '' }}">
-        @if(!$data->hasMorePages())
+    <div class="d-flex justify-content-between">
         <div>
-            Showing {{ $data->firstItem() }} to {{ $data->lastItem() }} of {{ $data->total() }} entries
+            Showing {{ $companies->firstItem() }} to {{ $companies->lastItem() }} of {{ $companies->total() }} entries
         </div>
-        @endif
         <div>
-            {{ $data->links() }}
+            {{ $companies->links() }}
         </div>
     </div>
-    @endif
-
 
     <!-- Delete Confirmation Modal -->
     <div class="modal" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" wire:ignore.self>
@@ -106,7 +81,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete this record?
+                    Are you sure you want to permanently delete this company?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -115,6 +90,5 @@
             </div>
         </div>
     </div>
-
 
 </div>

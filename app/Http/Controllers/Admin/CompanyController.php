@@ -14,8 +14,27 @@ class CompanyController extends Controller
     public function index()
     {
         //
+        // return Company::with('employees')->get();
         $title = "Company";
-        return view('admin.company.index', compact('title'));
+        $trash = Company::onlyTrashed()->count();
+        return view('admin.company.index', compact('title', 'trash'));
+    }
+
+    // for trash
+    public function trash()
+    {
+        //
+        $title = "Company";
+        return view('admin.company.trash', compact('title'));
+    }
+
+    // This method is used to fetch the count of trashed users
+    public function trashCounter()
+    {
+        $trashCount = Company::onlyTrashed()->count();
+
+        // Return the count as a JSON response
+        return response()->json(['trash_count' => $trashCount]);
     }
 
     /**

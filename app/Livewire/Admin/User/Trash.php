@@ -7,8 +7,9 @@ use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Trash extends Component
 {
+
     use WithPagination, WithoutUrlPagination;
 
     public $search = '';
@@ -18,19 +19,6 @@ class Index extends Component
     public $deleteId = null; // Holds the ID of the record to delete
 
     protected $queryString = ['search', 'sortField', 'sortDirection', 'perPage'];
-
-    protected $listeners = ['userCreated' => 'refreshUsers'];
-
-    public function refreshUsers()
-    {
-        // Re-fetch or refresh the data
-        $this->render();
-    }
-
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
 
     public function sortBy($field)
     {
@@ -42,7 +30,6 @@ class Index extends Component
         }
     }
 
-
     public function confirmDelete($id)
     {
         $this->deleteId = $id; // Set the record to be deleted
@@ -51,24 +38,40 @@ class Index extends Component
     public function delete()
     {
         if ($this->deleteId) {
-            User::findOrFail($this->deleteId)->delete(); // Replace User with your model
+            User::findOrFail($this->deleteId)->delete(); // Soft delete the user
             $this->deleteId = null;
-            $this->dispatch('updateTrashCount');
-            $this->dispatch('alert', ['type' => 'success',  'message' => 'User has been deleted successfully!']);
+            $this->dispatch('alert', ['type' => 'success', 'message' => 'User has been deleted successfully!']);
+        }
+    }
+
+    public function restore($id)
+    {
+        $user = User::onlyTrashed()->find($id);
+        if ($user) {
+            $user->restore();
+            $this->dispatch('alert', ['type' => 'success', 'message' => 'User has been restored successfully!']);
         }
     }
 
     public function render()
     {
-        $data = User::with('roles') // Replace with your model
+        $query = User::onlyTrashed() // Ensure `onlyTrashed()` is called first
             ->where(function ($query) {
                 $query->where('is_admin', 1)
                     ->orWhere('is_company', 1);
-            })
-            ->where('first_name', 'like', '%' . $this->search . '%') // Adjust the column
-            ->orderBy($this->sortField, $this->sortDirection)
+            });
+
+        if ($this->search) {
+            $query->where(function ($q) {
+                $q->where('first_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        // Add sorting and pagination
+        $data = $query->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.admin.user.index', ['data' => $data]);
+        return view('livewire.admin.user.trash', ['data' => $data]);
     }
 }

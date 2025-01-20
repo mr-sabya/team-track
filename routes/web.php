@@ -23,10 +23,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
 
     Route::get('users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user.index');
+    Route::get('users/trash', [App\Http\Controllers\Admin\UserController::class, 'trash'])->name('user.trash');
+    Route::get('users/trashcounter', [App\Http\Controllers\Admin\UserController::class, 'trashCounter'])->name('user.trashcounter');
     Route::get('user/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('user.edit');
 
     // company
     Route::get('companies', [App\Http\Controllers\Admin\CompanyController::class, 'index'])->name('company.index');
+    Route::get('companies/trash', [App\Http\Controllers\Admin\CompanyController::class, 'trash'])->name('company.trash');
+    Route::get('companies/trashcounter', [App\Http\Controllers\Admin\CompanyController::class, 'trashCounter'])->name('company.trashcounter');
+
     Route::get('company/create', [App\Http\Controllers\Admin\CompanyController::class, 'create'])->name('company.create');
     Route::get('company/edit-dates/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'edit'])->name('company.edit');
     Route::get('company/edit-basic-info/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'editBasicInfo'])->name('company.edit-basic-info');
@@ -36,6 +41,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // employee
     Route::get('employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('employee.index');
+    Route::get('employees/trash', [App\Http\Controllers\Admin\EmployeeController::class, 'trash'])->name('employee.trash');
+    Route::get('employees/trashcount', [App\Http\Controllers\Admin\EmployeeController::class, 'trashCounter'])->name('employee.trashcount');
     Route::get('employees/filter', [App\Http\Controllers\Admin\EmployeeController::class, 'filterData'])->name('employee.filterData');
 
     Route::prefix('employee')->as('employee.')->group(function () {

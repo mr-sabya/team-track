@@ -69,12 +69,12 @@ class User extends Authenticatable
 
     public function country()
     {
-        return $this->belongsTo(Country::class,'country_id');    
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public function company()
     {
-        return $this->belongsTo(Company::class,'company_id');    
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     // user visa
@@ -119,4 +119,5 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserExtra::class, 'user_id');
     }
+
 }
