@@ -26,23 +26,46 @@ class Company extends Model
         'wifi_bills',
         'sewerage_bills',
         'mobile_bills',
-
         'logo',
         'email',
         'phone',
         'address',
         'salution',
         'signature',
+        'website', // Add website to the fillable fields
+        'employee_count', // Add employee_count to the fillable fields
+        'subscription_plan_id', // Add subscription_plan_id to the fillable fields
     ];
 
-
+    /**
+     * The relationship between a company and its users.
+     */
     public function users()
     {
         return $this->hasMany(User::class);
     }
 
+    /**
+     * The relationship between a company and its employees.
+     */
     public function employees()
     {
-        return $this->hasMany(User::class, 'company_id');    
+        return $this->hasMany(User::class, 'company_id');
+    }
+
+    /**
+     * The relationship between a company and its subscription plan.
+     */
+    public function subscriptionPlan()
+    {
+        return $this->belongsTo(Plan::class, 'subscription_plan_id');
+    }
+
+    /**
+     * Check if the company can add more employees based on the current subscription plan.
+     */
+    public function canAddEmployee()
+    {
+        return $this->employee_count < $this->subscriptionPlan->max_employees;
     }
 }

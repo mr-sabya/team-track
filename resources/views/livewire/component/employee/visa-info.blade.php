@@ -29,7 +29,7 @@
                     <img src="{{ $image->temporaryUrl() }}" alt="">
                     @endif
                     @if($existingImage)
-                    <img src="{{ url('storage.', $existingImage) }}" alt="">
+                    <img src="{{ url('storage', $existingImage) }}" alt="">
                     @endif
                 </div>
                 <div class="mb-3 mt-2">

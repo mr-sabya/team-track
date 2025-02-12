@@ -34,7 +34,13 @@
                                 <h6 class="m-0"> Notifications </h6>
                             </div>
                             <div class="col-auto">
-                                <a href="#!" class="small"> View All</a>
+                                @if(Auth::user()->is_admin)
+                                <a wire:navigate href="{{ route('notification.index') }}" class="small"> View All</a>
+                                @elseif(Auth::user()->is_company)
+                                <a wire:navigate href="{{ route('company-dash.notification.index') }}" class="small"> View All</a>
+                                @else
+                                <a wire:navigate href="{{ route('employee-dash.notification.index') }}" class="small"> View All</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -87,8 +93,17 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i> Profile</a>
-                    <a class="dropdown-item d-block" href="#"><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
+                    @if(Auth::user()->is_admin)
+                    <a class="dropdown-item" href="{{ route('admin.profile') }}" wire:navigate><i class="ri-user-line align-middle me-1"></i> Profile</a>
+                    <a class="dropdown-item d-block" href="{{ route('notification.setting') }}" wire:navigate><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
+                    @elseif(Auth::user()->is_company)
+                    <a class="dropdown-item" href="{{ route('company-dash.profile') }}" wire:navigate><i class="ri-user-line align-middle me-1"></i> Profile</a>
+                    <a class="dropdown-item d-block" href="#" wire:navigate><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
+                    @else
+                    <a class="dropdown-item" href="{{ route('employee-dash.profile')}}" wire:navigate><i class="ri-user-line align-middle me-1"></i> Profile</a>
+                    <a class="dropdown-item d-block" href="#" wire:navigate><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
+                    @endif
+
                     <div class="dropdown-divider"></div>
                     <livewire:auth.logout />
                 </div>

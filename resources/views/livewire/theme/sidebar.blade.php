@@ -95,8 +95,6 @@
                         <li><a href="{{ route('company.index') }}" wire:navigate>Company Management</a></li>
                         @endif
 
-                        <li><a href="auth-recoverpw.html">Recover Password</a></li>
-                        <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                     </ul>
                 </li>
 

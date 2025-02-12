@@ -120,4 +120,11 @@ class User extends Authenticatable
         return $this->hasOne(UserExtra::class, 'user_id');
     }
 
+    /**
+     * Get the user's setting.
+     */
+    public function setting()
+    {
+        return $this->hasOne(Setting::class);
+    }
 }

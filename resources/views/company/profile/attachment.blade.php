@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="card-body">
-                    <livewire:component.company.attachment companyId="{{ $company->id }}" />
+                    <livewire:component.company.document companyId="{{ $company->id }}" />
                 </div>
             </div>
         </div>
