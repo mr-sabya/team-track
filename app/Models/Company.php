@@ -35,6 +35,8 @@ class Company extends Model
         'website', // Add website to the fillable fields
         'employee_count', // Add employee_count to the fillable fields
         'subscription_plan_id', // Add subscription_plan_id to the fillable fields
+        'subscription_type',
+        'subscription_status'
     ];
 
     /**

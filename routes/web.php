@@ -157,4 +157,8 @@ Route::prefix('company-dash')->as('company-dash.')->middleware(['auth', 'company
 
     // notifications
     Route::get('notifications', [App\Http\Controllers\Company\NotificationController::class, 'index'])->name('notification.index');
+
+    // plan
+    Route::get('plans', [App\Http\Controllers\Company\PlanController::class, 'index'])->name('plan.index');
+    Route::get('plans/apply/{id}', [App\Http\Controllers\Company\PlanController::class, 'apply'])->name('plan.apply');
 });

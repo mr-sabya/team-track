@@ -53,7 +53,8 @@ class IndexName extends Component
         if ($this->deleteId) {
             Company::findOrFail($this->deleteId)->delete(); // Replace User with your model
             $this->deleteId = null;
-            session()->flash('message', 'Record deleted successfully!');
+            // session()->flash('message', 'Record deleted successfully!');
+            $this->dispatch('alert', ['type' => 'success',  'message' => 'Company Type been deleted successfully!']);
         }
     }
 

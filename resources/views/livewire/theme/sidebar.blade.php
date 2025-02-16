@@ -136,6 +136,13 @@
                         <span>Company Profile</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('company-dash.plan.index') }}" wire:navigate class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>Plans</span>
+                    </a>
+                </li>
                 @else
 
                 <li class="{{ Route::is('employee-dash.home') ? 'mm-active' : '' }}">
