@@ -24,8 +24,26 @@
                 @if( Auth::user()->is_superadmin || Auth::user()->can('manage-insurance-type'))
                 <li>
                     <a href="{{ route('insurance.index') }}" wire:navigate class=" waves-effect">
-                        <i class="ri-calendar-2-line"></i>
+                        <i class="ri-file-shred-line"></i>
                         <span>Insurance Type</span>
+                    </a>
+                </li>
+                @endif
+
+                @if( Auth::user()->is_superadmin || Auth::user()->can('manage-document-type'))
+                <li>
+                    <a href="{{ route('document-type.index') }}" wire:navigate class=" waves-effect">
+                        <i class="ri-newspaper-line"></i>
+                        <span>Document Type</span>
+                    </a>
+                </li>
+                @endif
+
+                @if( Auth::user()->is_superadmin )
+                <li>
+                    <a href="{{ route('cache.index') }}" wire:navigate class=" waves-effect">
+                        <i class="ri-eraser-line"></i>
+                        <span>Clear Cache</span>
                     </a>
                 </li>
                 @endif
@@ -38,7 +56,7 @@
                 @if( Auth::user()->is_superadmin)
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class="ri-file-user-line"></i>
                         <span>Role & Permissions</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -54,7 +72,7 @@
                 @if( Auth::user()->is_superadmin || Auth::user()->can('manage-company') && Auth::user()->can('manage-employee'))
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class="ri-community-line"></i>
                         <span>Company</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -81,9 +99,10 @@
                 </li>
                 @endif
 
+                @if( Auth::user()->is_superadmin || Auth::user()->can('manage-company'))
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class="ri-tools-line"></i>
                         <span>Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -97,12 +116,29 @@
 
                     </ul>
                 </li>
+                @endif
 
                 @if( Auth::user()->is_superadmin)
                 <li>
                     <a href="{{ route('backup.index') }}" wire:navigate class=" waves-effect">
-                        <i class="ri-calendar-2-line"></i>
+                        <i class="ri-database-2-line"></i>
                         <span>Backup</span>
+                    </a>
+                </li>
+                @endif
+
+
+                @if( Auth::user()->is_superadmin)
+                <li>
+                    <a href="{{ route('plan.index') }}" wire:navigate class=" waves-effect">
+                        <i class="ri-file-list-line"></i>
+                        <span>Plans</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('plan.company') }}" wire:navigate class=" waves-effect">
+                        <i class="ri-contacts-book-line"></i>
+                        <span>Company Plans</span>
                     </a>
                 </li>
                 @endif

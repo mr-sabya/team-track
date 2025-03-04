@@ -14,12 +14,18 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('company_id');
-            $table->string('type');
+            $table->foreignId('document_type_id')->nullable()->onDelete('cascade');
             $table->string('identifier')->nullable();
             $table->date('issue_date')->nullable();
             $table->date('expiry_date')->nullable();
             $table->decimal('amount', 10, 2)->nullable();
+
+            // Add period column
+            $table->date('period_start')->nullable();
+            $table->date('period_end')->nullable();
             $table->string('period')->nullable();
+
+
             $table->enum('status', ['active', 'expired', 'pending', 'paid'])->default('active');
             $table->string('attachment')->nullable();
 

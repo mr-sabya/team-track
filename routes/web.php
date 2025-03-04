@@ -32,6 +32,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('companies', [App\Http\Controllers\Admin\CompanyController::class, 'index'])->name('company.index');
     Route::get('companies/trash', [App\Http\Controllers\Admin\CompanyController::class, 'trash'])->name('company.trash');
     
+    //document type
+    Route::get('document-type', [App\Http\Controllers\Admin\DocumentTypeController::class, 'index'])->name('document-type.index');
 
     Route::get('company/create', [App\Http\Controllers\Admin\CompanyController::class, 'create'])->name('company.create');
     Route::get('company/edit-dates/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'edit'])->name('company.edit');
@@ -90,6 +92,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // plan
     Route::get('plans', [App\Http\Controllers\Admin\PlanController::class, 'index'])->name('plan.index');
+    // company plans
+    Route::get('plans/company', [App\Http\Controllers\Admin\PlanController::class, 'companyPlans'])->name('plan.company');
+
+    // cache
+    Route::get('cache', [App\Http\Controllers\Admin\CacheController::class, 'index'])->name('cache.index');
+
 });
 
 

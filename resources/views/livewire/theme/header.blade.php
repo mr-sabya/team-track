@@ -49,10 +49,9 @@
                         <a href="#" class="text-reset notification-item">
                             <div class="d-flex">
                                 <div class="flex-1">
-                                    <h6 class="mb-1">Your order is placed</h6>
+                                    <h6 class="mb-1">{{ $notification->data['message'] ?? 'N/A' }}</h6>
                                     <div class="font-size-12 text-muted">
-                                        <p class="mb-1">If several languages coalesce the grammar</p>
-                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->format('d M, Y h:i A') }}</p>
                                     </div>
                                 </div>
                             </div>

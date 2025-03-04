@@ -19,3 +19,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+
+# <!-- developed by : Sabya Roy -->
+# <!-- contact developer : https://www.facebook.com/sabya.info/ -->

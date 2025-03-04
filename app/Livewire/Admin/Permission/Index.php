@@ -14,6 +14,7 @@ class Index extends Component
     public $name, $permissionId;
     public $isEditing = false;
     public $search = '', $title;
+    public $editMode = false;
 
     protected $rules = [
         'name' => 'required|string|unique:permissions,name',

@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::create([
-        //     'first_name' => 'Sabya',
-        //     'last_name' => 'Roy',
-        //     'email' => 'sabya.citik@gmail.com',
-        //     'password' => Hash::make('sabya12345'),
+        //     'first_name' => 'Super',
+        //     'last_name' => 'Admin',
+        //     'email' => 'admin@teamtrack24.com',
+        //     'password' => Hash::make('teamtrack24'),
         //     'is_superadmin' => 1,
         //     'is_admin' => 1,
         // ]);

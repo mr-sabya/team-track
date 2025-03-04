@@ -36,7 +36,14 @@ class Company extends Model
         'employee_count', // Add employee_count to the fillable fields
         'subscription_plan_id', // Add subscription_plan_id to the fillable fields
         'subscription_type',
-        'subscription_status'
+        'subscription_status',
+        'subscription_applied_at',
+        'subscription_start_date',
+        'subscription_end_date',
+    ];
+
+    protected $casts = [
+        'subscription_applied_at' => 'datetime',
     ];
 
     /**

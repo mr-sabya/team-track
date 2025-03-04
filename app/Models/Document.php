@@ -12,11 +12,13 @@ class Document extends Model
 
     protected $fillable = [
         'company_id',
-        'type',
+        'document_type_id',
         'identifier',
         'issue_date',
         'expiry_date',
         'amount',
+        'period_start',
+        'period_end',
         'period',
         'status',
         'attachment'
@@ -30,5 +32,10 @@ class Document extends Model
     public function getAttachmentUrlAttribute()
     {
         return $this->attachment ? Storage::url($this->attachment) : null;
+    }
+
+    public function documentType()
+    {
+        return $this->belongsTo(DocumentType::class);
     }
 }

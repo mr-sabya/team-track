@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Passport Info')
+
 @section('content')
 
 <div class="container-fluid">

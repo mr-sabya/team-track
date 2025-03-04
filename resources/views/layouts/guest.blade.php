@@ -3,10 +3,13 @@
 
 <head>
 
+    <!-- developed by : Sabya Roy -->
+    <!-- contact developer : https://www.facebook.com/sabya.info/ -->
+
     <meta charset="utf-8" />
-    <title>Login | Appzia - Admin & Dashboard Template</title>
+    <title>Login | Team Track</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Team Track" name="description" />
     <meta content="Themesdesign" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -46,6 +49,10 @@
 
     <script data-navigate-once src="{{ asset('assets/js/app.js') }}"></script>
     @livewireScripts
+
+
+    <!-- developed by : Sabya Roy -->
+    <!-- contact developer : https://www.facebook.com/sabya.info/ -->
 
 </body>
 

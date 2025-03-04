@@ -13,4 +13,11 @@ class PlanController extends Controller
         $title = 'Plan';
         return view('admin.plan.index', compact('title'));
     }
+
+    // company plants
+    public function companyPlans()
+    {
+        $title = 'Company Plans';
+        return view('admin.plan.company-plans', compact('title'));
+    }
 }

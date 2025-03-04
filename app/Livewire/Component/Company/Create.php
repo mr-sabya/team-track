@@ -36,6 +36,10 @@ class Create extends Component
                 'wifi_bills' => $this->wifi_bills,
                 'sewerage_bills' => $this->sewerage_bills,
                 'mobile_bills' => $this->mobile_bills,
+                'subscription_plan_id' => 1,
+                'subscription_type' => 'yearly',
+                'subscription_status' => 'active',
+                'subscription_applied_at' => now(),
             ]);
 
             $this->dispatch('alert', ['type' => 'success',  'message' => 'Company has been created successfully!']);

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Add Bulk Employee')
+
 @section('content')
 
 <div class="container-fluid">

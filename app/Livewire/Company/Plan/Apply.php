@@ -42,6 +42,7 @@ class Apply extends Component
             'subscription_plan_id' => $this->plan->id,
             'subscription_type' => $type,
             'subscription_status' => 'pending',
+            'subscription_applied_at' => now(),
         ]);
 
         // Send Notification to Super Admins

@@ -5,9 +5,6 @@
 @section('content')
 
 <div class="container-fluid">
-
-
-    <livewire:admin.insurance-type.index title="{{ $title }}" />
-
+    <livewire:admin.plan.company-plans title="{{ $title }}" />
 </div>
 @endsection

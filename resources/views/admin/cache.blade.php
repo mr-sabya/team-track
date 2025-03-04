@@ -5,9 +5,6 @@
 @section('content')
 
 <div class="container-fluid">
-
-
-    <livewire:admin.insurance-type.index title="{{ $title }}" />
-
+    <livewire:clear-cache title="{{ $title }}" />
 </div>
 @endsection

@@ -20,10 +20,25 @@
 
     <div class="row">
         <!-- Current Plan Card -->
-        
+
 
         <!-- Available Plans -->
         <div class="col-lg-6">
+            @if($company->subscription_status === 'pending')
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Warning!</strong> Your subscription is pending. Please complete the payment to activate your subscription.
+            </div>
+            @elseif($company->subscription_status === 'active')
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Your subscription is active. You can now enjoy the benefits of your plan.
+            </div>
+            @elseif($company->subscription_status === 'suspended')
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Warning!</strong> Your subscription is suspended. Please contact to SUPER ADMIN to activate your subscription.
+            </div>
+            @endif
+
+
             <div class="row">
                 @foreach($plans as $plan)
                 <div class="col-md-4 mb-4">
@@ -47,7 +62,7 @@
                             <!-- Display Apply Plan button for other plans -->
                             <a class="btn btn-primary btn-block mt-2" href="{{ route('company-dash.plan.apply', $plan->id) }}" wire:navigate>
                                 Apply Plan
-</a>
+                            </a>
                             @endif
                         </div>
                     </div>

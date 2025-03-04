@@ -49,7 +49,7 @@
 
         </div>
     </form>
-    <hr>
+    <!-- <hr>
     <div class="row g-2">
         <div class="col-lg-6">
             <button class="btn btn-primary btn-block waves-effect waves-light w-100" wire:click="superAdminLogin">Superadmin Login</button>
@@ -63,6 +63,6 @@
         <div class="col-lg-6">
             <button class="btn btn-primary btn-block waves-effect waves-light w-100" wire:click="employeeLogin">Employee Login</button>
         </div>
-    </div>
+    </div> -->
 
 </div>

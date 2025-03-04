@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::table('companies', function (Blueprint $table) {
             $table->enum('subscription_type', ['monthly', 'yearly'])->default('monthly');
             $table->enum('subscription_status', ['pending', 'active', 'suspended'])->default('active');
+            $table->timestamp('subscription_applied_at')->nullable();
+            $table->date('subscription_start_date')->nullable();
+            $table->date('subscription_end_date')->nullable();
         });
     }
 
